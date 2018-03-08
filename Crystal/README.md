@@ -4,9 +4,14 @@ Crystal database admin and site.
 
 # Code generation
 
-To generate models:
+To generate db context and models:
 ```
 dotnet ef dbcontext scaffold "Server=.\SQLEXPRESS;Database=Crystal;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -c CrystalContext -o Models -t HeadTablLanguage -t HeadTablInvariant
+```
+
+To generate pages:
+```
+dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -udl -outDir Pages\HeadTabl --referenceScriptLibraries
 ```
 
 # References
@@ -15,3 +20,4 @@ dotnet ef dbcontext scaffold "Server=.\SQLEXPRESS;Database=Crystal;Trusted_Conne
 2. [EF Core .NET Command-line Tools](https://docs.microsoft.com/en-us/ef/core/miscellaneous/cli/dotnet)
 3. [Getting Started with EF Core on ASP.NET Core with an Existing Database](https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db)
 4. [Connection Strings](https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-strings)
+5. [Adding a model to a Razor Pages app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model)
