@@ -19,8 +19,7 @@ namespace Crystal.Pages.HeadTabl
             _context = context;
         }
 
-        [BindProperty]
-        public HeadTablLanguage HeadTablLanguage { get; set; }
+        [BindProperty] public HeadTablLanguage HeadTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -30,40 +29,39 @@ namespace Crystal.Pages.HeadTabl
             }
 
             HeadTablLanguage = await _context.HeadTablLanguage
-                .Include(h => h.HeadTabl).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(h => h.HeadTabl)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (HeadTablLanguage == null)
             {
                 return NotFound();
             }
-           ViewData["HeadTablId"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
-            _context.Attach(HeadTablLanguage).State = EntityState.Modified;
 
-            try
+            var headTablToUpdate = await _context.HeadTablLanguage
+                .Include(h => h.HeadTabl)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
+            if (await TryUpdateModelAsync<HeadTablLanguage>(
+                headTablToUpdate,
+                "HeadTablLanguage",
+                i => i.HeadTabl, i => i.LanguageId, i => i.Expert, i => i.System
+            ))
             {
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HeadTablLanguageExists(HeadTablLanguage.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+
 
             return RedirectToPage("./Index");
         }

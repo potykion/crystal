@@ -22,3 +22,4 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 4. [Connection Strings](https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-strings)
 5. [Adding a model to a Razor Pages app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model)
 6. [Reading related data - EF Core with Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/read-related-data)
+7. [Updating related data - EF Core Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/update-related-data#create-a-base-class-to-share-common-code)
