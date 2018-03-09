@@ -18,11 +18,12 @@ namespace Crystal.Pages.HeadTabl
             _context = context;
         }
 
-        public IList<HeadTablInvariant> HeadTablInvariant { get;set; }
+        public IList<HeadTablLanguage> HeadTablLanguage { get;set; }
 
         public async Task OnGetAsync()
         {
-            HeadTablInvariant = await _context.HeadTablInvariant.ToListAsync();
+            HeadTablLanguage = await _context.HeadTablLanguage
+                .Include(h => h.HeadTabl).ToListAsync();
         }
     }
 }

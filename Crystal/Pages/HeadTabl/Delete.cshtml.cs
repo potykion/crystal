@@ -19,7 +19,7 @@ namespace Crystal.Pages.HeadTabl
         }
 
         [BindProperty]
-        public HeadTablInvariant HeadTablInvariant { get; set; }
+        public HeadTablLanguage HeadTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,9 +28,10 @@ namespace Crystal.Pages.HeadTabl
                 return NotFound();
             }
 
-            HeadTablInvariant = await _context.HeadTablInvariant.FirstOrDefaultAsync(m => m.HeadClue == id);
+            HeadTablLanguage = await _context.HeadTablLanguage
+                .Include(h => h.HeadTabl).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (HeadTablInvariant == null)
+            if (HeadTablLanguage == null)
             {
                 return NotFound();
             }
@@ -44,11 +45,11 @@ namespace Crystal.Pages.HeadTabl
                 return NotFound();
             }
 
-            HeadTablInvariant = await _context.HeadTablInvariant.FindAsync(id);
+            HeadTablLanguage = await _context.HeadTablLanguage.FindAsync(id);
 
-            if (HeadTablInvariant != null)
+            if (HeadTablLanguage != null)
             {
-                _context.HeadTablInvariant.Remove(HeadTablInvariant);
+                _context.HeadTablLanguage.Remove(HeadTablLanguage);
                 await _context.SaveChangesAsync();
             }
 

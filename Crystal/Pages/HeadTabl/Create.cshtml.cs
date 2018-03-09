@@ -20,11 +20,12 @@ namespace Crystal.Pages.HeadTabl
 
         public IActionResult OnGet()
         {
+        ViewData["HeadTablId"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
             return Page();
         }
 
         [BindProperty]
-        public HeadTablInvariant HeadTablInvariant { get; set; }
+        public HeadTablLanguage HeadTablLanguage { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -33,7 +34,7 @@ namespace Crystal.Pages.HeadTabl
                 return Page();
             }
 
-            _context.HeadTablInvariant.Add(HeadTablInvariant);
+            _context.HeadTablLanguage.Add(HeadTablLanguage);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

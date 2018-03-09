@@ -21,3 +21,4 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 3. [Getting Started with EF Core on ASP.NET Core with an Existing Database](https://docs.microsoft.com/en-us/ef/core/get-started/aspnetcore/existing-db)
 4. [Connection Strings](https://docs.microsoft.com/en-us/ef/core/miscellaneous/connection-strings)
 5. [Adding a model to a Razor Pages app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/model)
+6. [Reading related data - EF Core with Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/data/ef-rp/read-related-data)

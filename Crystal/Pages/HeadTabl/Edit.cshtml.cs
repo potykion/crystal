@@ -20,7 +20,7 @@ namespace Crystal.Pages.HeadTabl
         }
 
         [BindProperty]
-        public HeadTablInvariant HeadTablInvariant { get; set; }
+        public HeadTablLanguage HeadTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,12 +29,14 @@ namespace Crystal.Pages.HeadTabl
                 return NotFound();
             }
 
-            HeadTablInvariant = await _context.HeadTablInvariant.FirstOrDefaultAsync(m => m.HeadClue == id);
+            HeadTablLanguage = await _context.HeadTablLanguage
+                .Include(h => h.HeadTabl).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (HeadTablInvariant == null)
+            if (HeadTablLanguage == null)
             {
                 return NotFound();
             }
+           ViewData["HeadTablId"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
             return Page();
         }
 
@@ -45,7 +47,7 @@ namespace Crystal.Pages.HeadTabl
                 return Page();
             }
 
-            _context.Attach(HeadTablInvariant).State = EntityState.Modified;
+            _context.Attach(HeadTablLanguage).State = EntityState.Modified;
 
             try
             {
@@ -53,7 +55,7 @@ namespace Crystal.Pages.HeadTabl
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HeadTablInvariantExists(HeadTablInvariant.HeadClue))
+                if (!HeadTablLanguageExists(HeadTablLanguage.Id))
                 {
                     return NotFound();
                 }
@@ -66,9 +68,9 @@ namespace Crystal.Pages.HeadTabl
             return RedirectToPage("./Index");
         }
 
-        private bool HeadTablInvariantExists(int id)
+        private bool HeadTablLanguageExists(int id)
         {
-            return _context.HeadTablInvariant.Any(e => e.HeadClue == id);
+            return _context.HeadTablLanguage.Any(e => e.Id == id);
         }
     }
 }

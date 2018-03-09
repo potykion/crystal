@@ -14,27 +14,39 @@
     <thead>
         <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.HeadTablInvariant[0].Help)
+                    @Html.DisplayNameFor(model => model.HeadTablLanguage[0].LanguageId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.HeadTablInvariant[0].Class)
+                    @Html.DisplayNameFor(model => model.HeadTablLanguage[0].Expert)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeadTablLanguage[0].System)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeadTablLanguage[0].HeadTabl)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.HeadTablInvariant) {
+@foreach (var item in Model.HeadTablLanguage) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Help)
+                @Html.DisplayFor(modelItem => item.LanguageId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Class)
+                @Html.DisplayFor(modelItem => item.Expert)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.HeadClue">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.HeadClue">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.HeadClue">Delete</a>
+                @Html.DisplayFor(modelItem => item.System)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HeadTabl.Help)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
 }
