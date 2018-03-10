@@ -1,24 +1,21 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Crystal.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
 namespace Crystal.Pages.HeadTabl
 {
     public class IndexModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
 
-        public IndexModel(Crystal.Models.CrystalContext context)
+        public IndexModel(CrystalContext context)
         {
             _context = context;
         }
 
-        public IList<HeadTablLanguage> HeadTablLanguage { get;set; }
+        public IList<HeadTablLanguage> HeadTablLanguage { get; set; }
 
         public async Task OnGetAsync()
         {

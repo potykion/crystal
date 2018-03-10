@@ -1,20 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Crystal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
 namespace Crystal.Pages.HeadTabl
 {
     public class EditModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
 
-        public EditModel(Crystal.Models.CrystalContext context)
+        public EditModel(CrystalContext context)
         {
             _context = context;
         }
@@ -48,27 +44,22 @@ namespace Crystal.Pages.HeadTabl
                 return Page();
             }
 
-
             var headTablToUpdate = await _context.HeadTablLanguage
                 .Include(h => h.HeadTabl)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(h => h.Id == id);
 
-            if (await TryUpdateModelAsync<HeadTablLanguage>(
+            var updated = await TryUpdateModelAsync(
                 headTablToUpdate,
                 "HeadTablLanguage",
-                i => i.HeadTabl, i => i.LanguageId, i => i.Expert, i => i.System
-            ))
+                h => h.System, h => h.HeadTabl, h => h.Expert
+            );
+
+            if (updated)
             {
                 await _context.SaveChangesAsync();
             }
 
-
             return RedirectToPage("./Index");
-        }
-
-        private bool HeadTablLanguageExists(int id)
-        {
-            return _context.HeadTablLanguage.Any(e => e.Id == id);
         }
     }
 }
