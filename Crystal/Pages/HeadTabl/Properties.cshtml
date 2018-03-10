@@ -1,0 +1,18 @@
+﻿@page "{id: int}"
+@model HeadTabl.PropertiesIndex
+
+@{
+    ViewData["Title"] = "Properties";
+}
+
+<h2>Properties</h2>
+
+<div class="list-group">
+    @foreach (var item in Model.PropertiesLanguage)
+    {
+        <a asp-page="../@item.Properties.TableName/Detail"
+           class="list-group-item">
+            @Html.Raw(item.Nazvprop)</a>
+    }
+
+</div>

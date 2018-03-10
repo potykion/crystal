@@ -1,5 +1,5 @@
 @page
-@model Crystal.Pages.HeadTabl.IndexModel
+@model HeadTabl.IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -40,6 +40,7 @@
                 @Html.DisplayFor(modelItem => item.Expert)
             </td>
             <td>
+                <a asp-page="./Properties" asp-route-id="@item.Id">Properties</a> |
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
