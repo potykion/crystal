@@ -18,13 +18,18 @@ namespace Crystal.Pages.HeatTabl
             _context = context;
         }
 
-        public IList<HeatTablInvariant> HeatTablInvariant { get;set; }
+        public IList<HeatTablInvariant> HeatTablInvariant { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? headClue)
         {
-            HeatTablInvariant = await _context.HeatTablInvariant
+            var heatTablValues = headClue.HasValue
+                ? _context.HeatTablInvariant.Where(heat => heat.HeadClue == headClue)
+                : _context.HeatTablInvariant;
+
+            HeatTablInvariant = await heatTablValues
                 .Include(h => h.BknumberNavigation)
-                .Include(h => h.HeadClueNavigation).ToListAsync();
+                .Include(h => h.HeadClueNavigation)
+                .ToListAsync();
         }
     }
 }
