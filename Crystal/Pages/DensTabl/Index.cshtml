@@ -1,0 +1,59 @@
+@page "{headClue:int}"
+@model Crystal.Pages.DensTabl.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    Sing:
+    @foreach (var sing in Model.SingTabl)
+    {
+        <a asp-page="./Index"
+           asp-route-singclue="@sing.SingClue">
+            @sing.SingType
+        </a>
+    }
+
+    / <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.DensTablLanguage[0].Density)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DensTablLanguage[0].ErrDens)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DensTablLanguage[0].MethodD)
+        </th>
+
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.DensTablLanguage)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Density)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ErrDens)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MethodD)
+            </td>
+
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
