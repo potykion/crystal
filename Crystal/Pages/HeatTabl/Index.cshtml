@@ -12,36 +12,34 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatTablInvariant[0].Temperat)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatTablInvariant[0].ZnC)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatTablInvariant[0].C)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatTablInvariant[0].ErrC)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HeatTablInvariant[0].BknumberNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HeatTablInvariant[0].HeadClueNavigation)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].Temperat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].ZnC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].C)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].ErrC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].BknumberNavigation.BibliogrLanguage.First().Authors)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.HeatTablInvariant) {
+    @foreach (var item in Model.HeatTablInvariant)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Temperat)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ZnC)
+                @Html.Raw(item.ZnC)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.C)
@@ -50,10 +48,7 @@
                 @Html.DisplayFor(modelItem => item.ErrC)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BknumberNavigation.Bknumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeadClueNavigation.Help)
+                @Html.DisplayFor(modelItem => item.BknumberNavigation.BibliogrLanguage.First().Authors)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -61,6 +56,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

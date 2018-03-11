@@ -28,7 +28,7 @@ namespace Crystal.Pages.HeatTabl
 
             HeatTablInvariant = await heatTablValues
                 .Include(h => h.BknumberNavigation)
-                .Include(h => h.HeadClueNavigation)
+                .Include(h => h.BknumberNavigation.BibliogrLanguage)
                 .ToListAsync();
         }
     }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,6 +9,9 @@ namespace Crystal.Pages.HeadTabl
 {
     public class PropertiesIndex : PageModel
     {
+        private readonly List<string> _availableProperties =
+            new List<string> {"HeatTabl", "DensTabl"};
+
         private readonly CrystalContext _context;
 
         public PropertiesIndex(CrystalContext context)
@@ -21,6 +25,7 @@ namespace Crystal.Pages.HeadTabl
         {
             PropertiesLanguage = await _context.PropertiesLanguage
                 .Include(p => p.Properties)
+                .Where(p => _availableProperties.Contains(p.Properties.TableName))
                 .ToListAsync();
         }
     }
