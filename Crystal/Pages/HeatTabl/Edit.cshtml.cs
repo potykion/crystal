@@ -20,7 +20,7 @@ namespace Crystal.Pages.HeatTabl
         }
 
         [BindProperty]
-        public HeatTablInvariant HeatTablInvariant { get; set; }
+        public HeatTablLanguage HeatTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,16 +29,14 @@ namespace Crystal.Pages.HeatTabl
                 return NotFound();
             }
 
-            HeatTablInvariant = await _context.HeatTablInvariant
-                .Include(h => h.BknumberNavigation)
-                .Include(h => h.HeadClueNavigation).FirstOrDefaultAsync(m => m.Id == id);
+            HeatTablLanguage = await _context.HeatTablLanguage
+                .Include(h => h.HeatTabl).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (HeatTablInvariant == null)
+            if (HeatTablLanguage == null)
             {
                 return NotFound();
             }
-           ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-           ViewData["HeadClue"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
+           ViewData["HeatTablId"] = new SelectList(_context.HeatTablInvariant, "Id", "Id");
             return Page();
         }
 
@@ -49,7 +47,7 @@ namespace Crystal.Pages.HeatTabl
                 return Page();
             }
 
-            _context.Attach(HeatTablInvariant).State = EntityState.Modified;
+            _context.Attach(HeatTablLanguage).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +55,7 @@ namespace Crystal.Pages.HeatTabl
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HeatTablInvariantExists(HeatTablInvariant.Id))
+                if (!HeatTablLanguageExists(HeatTablLanguage.Id))
                 {
                     return NotFound();
                 }
@@ -70,9 +68,9 @@ namespace Crystal.Pages.HeatTabl
             return RedirectToPage("./Index");
         }
 
-        private bool HeatTablInvariantExists(int id)
+        private bool HeatTablLanguageExists(int id)
         {
-            return _context.HeatTablInvariant.Any(e => e.Id == id);
+            return _context.HeatTablLanguage.Any(e => e.Id == id);
         }
     }
 }

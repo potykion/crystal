@@ -20,13 +20,12 @@ namespace Crystal.Pages.HeatTabl
 
         public IActionResult OnGet()
         {
-        ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-        ViewData["HeadClue"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
+        ViewData["HeatTablId"] = new SelectList(_context.HeatTablInvariant, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
-        public HeatTablInvariant HeatTablInvariant { get; set; }
+        public HeatTablLanguage HeatTablLanguage { get; set; }
 
         public async Task<IActionResult> OnPostAsync()
         {
@@ -35,7 +34,7 @@ namespace Crystal.Pages.HeatTabl
                 return Page();
             }
 
-            _context.HeatTablInvariant.Add(HeatTablInvariant);
+            _context.HeatTablLanguage.Add(HeatTablLanguage);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");

@@ -7,39 +7,20 @@
 
 <h2>Create</h2>
 
-<h4>HeatTablInvariant</h4>
+<h4>HeatTablLanguage</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="HeatTablInvariant.HeadClue" class="control-label"></label>
-                <select asp-for="HeatTablInvariant.HeadClue" class ="form-control" asp-items="ViewBag.HeadClue"></select>
+                <label asp-for="HeatTablLanguage.HeatTablId" class="control-label"></label>
+                <select asp-for="HeatTablLanguage.HeatTablId" class ="form-control" asp-items="ViewBag.HeatTablId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="HeatTablInvariant.Temperat" class="control-label"></label>
-                <input asp-for="HeatTablInvariant.Temperat" class="form-control" />
-                <span asp-validation-for="HeatTablInvariant.Temperat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatTablInvariant.ZnC" class="control-label"></label>
-                <input asp-for="HeatTablInvariant.ZnC" class="form-control" />
-                <span asp-validation-for="HeatTablInvariant.ZnC" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatTablInvariant.C" class="control-label"></label>
-                <input asp-for="HeatTablInvariant.C" class="form-control" />
-                <span asp-validation-for="HeatTablInvariant.C" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatTablInvariant.ErrC" class="control-label"></label>
-                <input asp-for="HeatTablInvariant.ErrC" class="form-control" />
-                <span asp-validation-for="HeatTablInvariant.ErrC" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatTablInvariant.Bknumber" class="control-label"></label>
-                <select asp-for="HeatTablInvariant.Bknumber" class ="form-control" asp-items="ViewBag.Bknumber"></select>
+                <label asp-for="HeatTablLanguage.MethodC" class="control-label"></label>
+                <input asp-for="HeatTablLanguage.MethodC" class="form-control" />
+                <span asp-validation-for="HeatTablLanguage.MethodC" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

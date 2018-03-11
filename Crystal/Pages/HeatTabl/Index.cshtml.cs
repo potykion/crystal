@@ -1,35 +1,33 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Crystal.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
 namespace Crystal.Pages.HeatTabl
 {
     public class IndexModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
 
-        public IndexModel(Crystal.Models.CrystalContext context)
+        public IndexModel(CrystalContext context)
         {
             _context = context;
         }
 
-        public IList<HeatTablInvariant> HeatTablInvariant { get; set; }
+        public IList<HeatTablLanguage> HeatTablLanguage { get; set; }
 
         public async Task OnGetAsync(int? headClue)
         {
-            var heatTablValues = headClue.HasValue
-                ? _context.HeatTablInvariant.Where(heat => heat.HeadClue == headClue)
-                : _context.HeatTablInvariant;
+            IQueryable<HeatTablLanguage> heatTablValues = _context.HeatTablLanguage
+                .Include(h => h.HeatTabl)
+                .Include(h => h.HeatTabl.BknumberNavigation.BibliogrLanguage);
 
-            HeatTablInvariant = await heatTablValues
-                .Include(h => h.BknumberNavigation)
-                .Include(h => h.BknumberNavigation.BibliogrLanguage)
-                .ToListAsync();
+            if (headClue.HasValue)
+                heatTablValues = heatTablValues.Where(heat => heat.HeatTabl.HeadClue == headClue);
+
+            HeatTablLanguage = await heatTablValues.ToListAsync();
         }
     }
 }

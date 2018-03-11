@@ -1,4 +1,5 @@
 @page
+@using Models
 @model Crystal.Pages.HeatTabl.IndexModel
 
 @{
@@ -14,45 +15,55 @@
     <thead>
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].Temperat)
+            @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.Temperat)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].ZnC)
+            @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ZnC)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].C)
+            @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.C)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].ErrC)
+            @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ErrC)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.HeatTablInvariant[0].BknumberNavigation.BibliogrLanguage.First().Authors)
+            @Html.DisplayNameFor(model => model.HeatTablLanguage[0].MethodC)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model =>
+                model.HeatTablLanguage[0].HeatTabl.BknumberNavigation.BibliogrLanguage.FirstOrDefault().Authors)
         </th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.HeatTablInvariant)
+    @foreach (var item in Model.HeatTablLanguage)
     {
         <tr>
+
             <td>
-                @Html.DisplayFor(modelItem => item.Temperat)
+                @Html.DisplayFor(modelItem => item.HeatTabl.Temperat)
             </td>
             <td>
-                @Html.Raw(item.ZnC)
+                @Html.Raw(item.HeatTabl.ZnC)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.C)
+                @Html.DisplayFor(model => item.HeatTabl.C)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ErrC)
+                @Html.DisplayFor(model => item.HeatTabl.ErrC)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BknumberNavigation.BibliogrLanguage.First().Authors)
+                @Html.DisplayFor(modelItem => item.MethodC)
             </td>
+            <td>
+                @Html.DisplayFor(modelItem =>
+                    item.HeatTabl.BknumberNavigation.BibliogrLanguage
+                        .FirstOrDefault(bibliogr => bibliogr.BibliogrId == item.HeatTabl.Bknumber).Authors)
+            </td>
+
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>

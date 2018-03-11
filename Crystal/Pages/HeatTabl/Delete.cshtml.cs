@@ -19,7 +19,7 @@ namespace Crystal.Pages.HeatTabl
         }
 
         [BindProperty]
-        public HeatTablInvariant HeatTablInvariant { get; set; }
+        public HeatTablLanguage HeatTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,11 +28,10 @@ namespace Crystal.Pages.HeatTabl
                 return NotFound();
             }
 
-            HeatTablInvariant = await _context.HeatTablInvariant
-                .Include(h => h.BknumberNavigation)
-                .Include(h => h.HeadClueNavigation).FirstOrDefaultAsync(m => m.Id == id);
+            HeatTablLanguage = await _context.HeatTablLanguage
+                .Include(h => h.HeatTabl).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (HeatTablInvariant == null)
+            if (HeatTablLanguage == null)
             {
                 return NotFound();
             }
@@ -46,11 +45,11 @@ namespace Crystal.Pages.HeatTabl
                 return NotFound();
             }
 
-            HeatTablInvariant = await _context.HeatTablInvariant.FindAsync(id);
+            HeatTablLanguage = await _context.HeatTablLanguage.FindAsync(id);
 
-            if (HeatTablInvariant != null)
+            if (HeatTablLanguage != null)
             {
-                _context.HeatTablInvariant.Remove(HeatTablInvariant);
+                _context.HeatTablLanguage.Remove(HeatTablLanguage);
                 await _context.SaveChangesAsync();
             }
 
