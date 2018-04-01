@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crystal.Pages.HeadTabl
+namespace Crystal.Pages.Substances
 {
     public class EditModel : PageModel
     {

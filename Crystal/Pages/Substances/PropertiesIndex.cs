@@ -5,7 +5,7 @@ using Crystal.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crystal.Pages.HeadTabl
+namespace Crystal.Pages.Substances
 {
     public class PropertiesIndex : PageModel
     {

@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Crystal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Crystal.Models;
 
-namespace Crystal.Pages.HeadTabl
+namespace Crystal.Pages.Substances
 {
     public class CreateModel : PageModel
     {

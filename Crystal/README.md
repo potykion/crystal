@@ -1,6 +1,6 @@
 # Info
 
-Crystal database admin and site.
+Crystal database admin.
 
 # Code generation
 
