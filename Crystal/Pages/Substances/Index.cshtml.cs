@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -20,7 +21,9 @@ namespace Crystal.Pages.Substances
         public async Task OnGetAsync()
         {
             HeadTablLanguage = await _context.HeadTablLanguage
-                .Include(h => h.HeadTabl).ToListAsync();
+                .Include(h => h.HeadTabl)
+                .Where(h => h.LanguageId == 1)
+                .ToListAsync();
         }
     }
 }

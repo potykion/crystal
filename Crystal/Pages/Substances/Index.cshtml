@@ -5,46 +5,19 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>Вещества</h2>
 
 <p>
     <a asp-page="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.HeadTablLanguage[0].System)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HeadTablLanguage[0].HeadTabl.Help)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HeadTablLanguage[0].Expert)
-        </th>
 
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
+
+<div class="row">
+
     @foreach (var item in Model.HeadTablLanguage)
     {
-        <tr>
-            <td>
-                @Html.Raw(item.System)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeadTabl.Help)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Expert)
-            </td>
-            <td>
-                <a asp-page="./Properties" asp-route-id="@item.Id">Properties</a> |
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+        <div class="col-md-3 col-sm-6">
+            <a asp-page="./Properties" asp-route-id="@item.Id">@Html.Raw(item.System)</a>
+        </div>
     }
-    </tbody>
-</table>
+</div>
