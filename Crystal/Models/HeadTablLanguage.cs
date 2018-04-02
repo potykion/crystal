@@ -10,6 +10,7 @@ namespace Crystal.Models
         public int LanguageId { get; set; }
         public string Expert { get; set; }
         public string System { get; set; }
+        public string SystemUrl { get; set; }
 
         public HeadTablInvariant HeadTabl { get; set; }
     }

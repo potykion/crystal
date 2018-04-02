@@ -36,6 +36,7 @@ namespace Crystal.Models
         public virtual DbSet<HeatExpnLanguage> HeatExpnLanguage { get; set; }
         public virtual DbSet<HeatTablInvariant> HeatTablInvariant { get; set; }
         public virtual DbSet<HeatTablLanguage> HeatTablLanguage { get; set; }
+        public virtual DbSet<Languages> Languages { get; set; }
         public virtual DbSet<LastModifiedLanguage> LastModifiedLanguage { get; set; }
         public virtual DbSet<LitrTabl> LitrTabl { get; set; }
         public virtual DbSet<MechTablLanguage> MechTablLanguage { get; set; }
@@ -223,19 +224,13 @@ namespace Crystal.Models
 
             modelBuilder.Entity<CuryTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.CuryTemp, e.ErrCury, e.Oboztran, e.Bknumber })
-                    .HasName("U_CuryTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.CuryTemp).HasColumnType("numeric(8, 4)");
 
                 entity.Property(e => e.ErrCury).HasColumnType("numeric(8, 5)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.Oboztran)
                     .HasMaxLength(50)
@@ -317,19 +312,13 @@ namespace Crystal.Models
 
             modelBuilder.Entity<DecrTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.Nzv, e.Uzv, e.WaveType, e.WaveSpeed, e.Decrement, e.DecrFreq, e.Bknumber })
-                    .HasName("U_DecrTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.DecrFreq).HasColumnType("numeric(10, 4)");
 
                 entity.Property(e => e.Decrement).HasColumnType("numeric(10, 6)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.Nzv)
                     .HasMaxLength(20)
@@ -368,19 +357,13 @@ namespace Crystal.Models
 
             modelBuilder.Entity<DensTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.Density, e.ErrDens, e.Bknumber, e.MethodD1 })
-                    .HasName("U_DensTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Density).HasColumnType("numeric(8, 6)");
 
                 entity.Property(e => e.ErrDens).HasColumnType("numeric(8, 7)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodD)
                     .HasMaxLength(1999)
@@ -415,8 +398,8 @@ namespace Crystal.Models
 
             modelBuilder.Entity<DielDissLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.FreqDiss, e.Temper3, e.TangName, e.TangentD, e.ErrDiss, e.Bknumber, e.MethodY1 })
-                    .HasName("U_DielDiss")
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.FreqDiss, e.Temper3, e.TangName, e.TangentD, e.ErrDiss, e.Bknumber, e.MethodY1, e.LanguageId })
+                    .HasName("U_DielDissLanguage")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -425,9 +408,7 @@ namespace Crystal.Models
 
                 entity.Property(e => e.FreqDiss).HasColumnType("numeric(12, 6)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodY)
                     .HasMaxLength(1999)
@@ -529,6 +510,10 @@ namespace Crystal.Models
 
             modelBuilder.Entity<Elastic1Invariant>(entity =>
             {
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.TemperEl, e.CondClu1, e.E1, e.ErrE, e.Bknumber })
+                    .HasName("U_Elastic1Invariant")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.CondClu1)
@@ -641,6 +626,10 @@ namespace Crystal.Models
 
             modelBuilder.Entity<ElemTablNewLanguage>(entity =>
             {
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.A, e.Aerr, e.B, e.Berr, e.C, e.Cerr, e.Alpha, e.AlphaErr, e.Beta, e.BetaErr, e.Gamma, e.GammaErr, e.Bknumber, e.MethodP1, e.LanguageId })
+                    .HasName("U_ElemTablNewLanguage")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Aerr).HasColumnName("AErr");
@@ -649,9 +638,7 @@ namespace Crystal.Models
 
                 entity.Property(e => e.Cerr).HasColumnName("CErr");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodP)
                     .HasMaxLength(512)
@@ -680,17 +667,15 @@ namespace Crystal.Models
 
             modelBuilder.Entity<ElOpTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.WvLeng, e.ZnN1, e.R, e.ErrR, e.Bknumber, e.MethodR1 })
-                    .HasName("U_ElOpTabl")
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.WvLeng, e.ZnN1, e.R, e.ErrR, e.Bknumber, e.MethodR1, e.LanguageId })
+                    .HasName("U_ElOpTablLanguage")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrR).HasColumnType("numeric(14, 8)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodR)
                     .HasMaxLength(1999)
@@ -822,17 +807,15 @@ namespace Crystal.Models
 
             modelBuilder.Entity<EsOpTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.LengWave, e.ZnP, e.P, e.ErrP, e.Bknumber, e.MethodP1 })
-                    .HasName("U_EsOpTabl")
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.LengWave, e.ZnP, e.P, e.ErrP, e.Bknumber, e.MethodP1, e.LanguageId })
+                    .HasName("U_EsOpTablLanguage")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrP).HasColumnType("numeric(9, 7)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.LengWave).HasColumnType("numeric(12, 8)");
 
@@ -869,15 +852,9 @@ namespace Crystal.Models
 
             modelBuilder.Entity<GrafTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.NompClue, e.NameGraf })
-                    .HasName("U_GrafTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.NameGraf)
                     .HasMaxLength(30)
@@ -898,10 +875,6 @@ namespace Crystal.Models
 
             modelBuilder.Entity<HardTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.Hard1, e.Hard2, e.ErrHard, e.Mohs, e.ErrMohs, e.Bknumber, e.MethodH1 })
-                    .HasName("U_HardTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrHard).HasColumnType("numeric(10, 6)");
@@ -912,9 +885,7 @@ namespace Crystal.Models
 
                 entity.Property(e => e.Hard2).HasColumnType("numeric(10, 5)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodH)
                     .HasMaxLength(1999)
@@ -983,8 +954,7 @@ namespace Crystal.Models
                 entity.Property(e => e.Help)
                     .IsRequired()
                     .HasMaxLength(32)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<HeadTablLanguage>(entity =>
@@ -1005,6 +975,11 @@ namespace Crystal.Models
                     .HasMaxLength(128)
                     .IsUnicode(false);
 
+                entity.Property(e => e.SystemUrl)
+                    .HasMaxLength(8000)
+                    .IsUnicode(false)
+                    .HasComputedColumnSql("(replace(replace([System],'<sub>',''),'</sub>',''))");
+
                 entity.HasOne(d => d.HeadTabl)
                     .WithMany(p => p.HeadTablLanguage)
                     .HasForeignKey(d => d.HeadTablId)
@@ -1013,10 +988,6 @@ namespace Crystal.Models
 
             modelBuilder.Entity<HeatExpnLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.DataType, e.Temper1, e.Temper2, e.Znak1, e.S11, e.ErrHexp, e.Bknumber, e.MethodEx1 })
-                    .HasName("U_HeatExpn")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.DataType).HasDefaultValueSql("(0)");
@@ -1025,9 +996,7 @@ namespace Crystal.Models
                     .HasColumnName("ErrHExp")
                     .HasColumnType("numeric(9, 7)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodEx)
                     .HasMaxLength(1999)
@@ -1120,13 +1089,20 @@ namespace Crystal.Models
                     .HasConstraintName("FK_HeatTablLanguage_HeatTablInvariant");
             });
 
+            modelBuilder.Entity<Languages>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Name)
+                    .HasMaxLength(2)
+                    .IsUnicode(false);
+            });
+
             modelBuilder.Entity<LastModifiedLanguage>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.LastModified)
                     .HasColumnType("datetime")
@@ -1154,8 +1130,8 @@ namespace Crystal.Models
 
             modelBuilder.Entity<MechTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.Bknumber, e.FreqCons, e.Temper, e.ZnK, e.K, e.ErrK, e.MethodK1 })
-                    .HasName("U_MechTabl")
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.Bknumber, e.FreqCons, e.Temper, e.ZnK, e.K, e.ErrK, e.MethodK1, e.LanguageId })
+                    .HasName("U_MechTablLanguage")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -1166,9 +1142,7 @@ namespace Crystal.Models
 
                 entity.Property(e => e.K).HasColumnType("numeric(8, 5)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodK)
                     .HasMaxLength(1999)
@@ -1203,6 +1177,10 @@ namespace Crystal.Models
 
             modelBuilder.Entity<MnOpTablInvariant>(entity =>
             {
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.Lyambda, e.Nw, e.N2w, e.Znakcon, e.K, e.ErrKj, e.Bknumber })
+                    .HasName("U_MnOpTablInvariant")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrKj).HasColumnType("numeric(8, 7)");
@@ -1262,6 +1240,10 @@ namespace Crystal.Models
 
             modelBuilder.Entity<ModfTablInvariant>(entity =>
             {
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.SuprTemp, e.Sp2, e.ErrSupr, e.PointGrp, e.Z, e.Bknumber })
+                    .HasName("U_ModfTablInvariant")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrSupr).HasColumnType("numeric(8, 5)");
@@ -1315,17 +1297,15 @@ namespace Crystal.Models
 
             modelBuilder.Entity<NlOpTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.Lyambda, e.ZnR, e.Rij, e.ErrRij, e.Bknumber, e.MethodR1 })
-                    .HasName("U_NlOpTabl")
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.Lyambda, e.ZnR, e.Rij, e.ErrRij, e.Bknumber, e.MethodR1, e.LanguageId })
+                    .HasName("U_NlOpTablLanguage")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrRij).HasColumnType("numeric(14, 8)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.Lyambda).HasColumnType("numeric(10, 8)");
 
@@ -1362,17 +1342,11 @@ namespace Crystal.Models
 
             modelBuilder.Entity<PlavTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.PlavType, e.PlavTemp, e.ErrPlav, e.Bknumber })
-                    .HasName("U_PlavTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrPlav).HasColumnType("numeric(9, 6)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.PlavTemp).HasColumnType("numeric(9, 5)");
 
@@ -1402,9 +1376,7 @@ namespace Crystal.Models
                     .HasColumnName("NOMPROP")
                     .ValueGeneratedNever();
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.Nazvprop)
                     .HasColumnName("NAZVPROP")
@@ -1451,8 +1423,11 @@ namespace Crystal.Models
                 entity.Property(e => e.TableName)
                     .IsRequired()
                     .HasMaxLength(16)
-                    .IsUnicode(false)
-                    .HasDefaultValueSql("('')");
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TableNameUrl)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<PropertiesLanguage>(entity =>
@@ -1478,6 +1453,10 @@ namespace Crystal.Models
 
             modelBuilder.Entity<PzElTablInvariant>(entity =>
             {
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.FreqPzEl, e.ConstD, e.D, e.ErrD, e.Bknumber })
+                    .HasName("U_PzElTablInvariant")
+                    .IsUnique();
+
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ConstD)
@@ -1594,9 +1573,7 @@ namespace Crystal.Models
 
                 entity.Property(e => e.HeadClue).ValueGeneratedNever();
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.Referat).HasColumnType("text");
 
@@ -1626,10 +1603,6 @@ namespace Crystal.Models
 
             modelBuilder.Entity<SistTabl>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.ElemNumb, e.MinValue, e.MaxValue })
-                    .HasName("U_SistTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ElemNumb)
@@ -1649,17 +1622,11 @@ namespace Crystal.Models
 
             modelBuilder.Entity<SuspTablLanguage>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.Temper, e.SuspName, e.Suspense, e.ErrSusp, e.Bknumber, e.MethodS1 })
-                    .HasName("U_SuspTabl")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.ErrSusp).HasColumnType("numeric(10, 9)");
 
-                entity.Property(e => e.LanguageId)
-                    .HasColumnName("LanguageID")
-                    .HasDefaultValueSql("((1))");
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.MethodS)
                     .HasMaxLength(1999)
@@ -1778,10 +1745,6 @@ namespace Crystal.Models
 
             modelBuilder.Entity<Wavepure>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.Leftwave, e.Rightwave, e.Bknumber })
-                    .HasName("U_WavePure")
-                    .IsUnique();
-
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Leftwave).HasColumnType("numeric(8, 5)");

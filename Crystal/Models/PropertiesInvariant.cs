@@ -14,6 +14,7 @@ namespace Crystal.Models
         public int Nomprop { get; set; }
         public string Html { get; set; }
         public string TableName { get; set; }
+        public string TableNameUrl { get; set; }
 
         public ICollection<EquationTabl> EquationTabl { get; set; }
         public ICollection<PropertiesLanguage> PropertiesLanguage { get; set; }
