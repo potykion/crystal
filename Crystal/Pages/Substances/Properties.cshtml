@@ -1,4 +1,4 @@
-﻿@page 
+﻿@page "{systemUrl}"
 @using Substances
 @model Substances.PropertiesIndex
 
@@ -14,6 +14,7 @@
         <a asp-page="../@item.Properties.TableName/Index"
            asp-route-headclue='@ViewContext.HttpContext.Request.Query["id"]'
            class="list-group-item">
-            @Html.Raw(item.Nazvprop)</a>
+            @Html.Raw(item.Nazvprop)
+        </a>
     }
 </div>

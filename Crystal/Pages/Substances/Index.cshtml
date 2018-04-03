@@ -17,7 +17,10 @@
     @foreach (var item in Model.HeadTablLanguage)
     {
         <div class="col-md-3 col-sm-6">
-            <a asp-page="./Properties" asp-route-id="@item.Id">@Html.Raw(item.System)</a>
+            <a asp-page="./Properties"
+               asp-route-systemurl="@item.SystemUrl">
+                @Html.Raw(item.System)
+            </a>
         </div>
     }
 </div>
