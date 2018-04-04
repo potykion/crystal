@@ -11,8 +11,8 @@
 <div class="list-group">
     @foreach (var item in Model.PropertiesLanguage)
     {
-        <a asp-page="../@item.Properties.TableName/Index"
-           asp-route-headclue='@ViewContext.HttpContext.Request.Query["id"]'
+        <a asp-page="./@item.Properties.TableNameUrl/Index"
+           asp-route-systemUrl='@ViewContext.RouteData.Values["systemUrl"]'
            class="list-group-item">
             @Html.Raw(item.Nazvprop)
         </a>

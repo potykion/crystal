@@ -1,13 +1,13 @@
 @page
-@model Crystal.Pages.HeatTabl.DeleteModel
+@using Substances.Heat
+@model Substances.Heat.DetailsModel
 
 @{
-    ViewData["Title"] = "Delete";
+    ViewData["Title"] = "Details";
 }
 
-<h2>Delete</h2>
+<h2>Details</h2>
 
-<h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>HeatTablLanguage</h4>
     <hr />
@@ -37,10 +37,8 @@
             @Html.DisplayFor(model => model.HeatTablLanguage.HeatTabl.Id)
         </dd>
     </dl>
-    
-    <form method="post">
-        <input type="hidden" asp-for="HeatTablLanguage.Id" />
-        <input type="submit" value="Delete" class="btn btn-default" /> |
-        <a asp-page="./Index">Back to List</a>
-    </form>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.HeatTablLanguage.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
 </div>

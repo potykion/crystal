@@ -29,3 +29,4 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 11. [Bootstrap](http://getbootstrap.com/docs/3.3/)
 12. [How to get query string parameter from MVC Razor markup?](https://stackoverflow.com/questions/11248064/how-to-get-query-string-parameter-from-mvc-razor-markup)
 13. [Razor Page - How to redirect to another folder's page using asp-for tag helper](https://stackoverflow.com/questions/45703640/razor-page-how-to-redirect-to-another-folders-page-using-asp-for-tag-helper)
+14. [Asp action route data](https://stackoverflow.com/questions/39096582/asp-action-route-data)

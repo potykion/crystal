@@ -1,13 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Crystal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
-namespace Crystal.Pages.DensTabl
+namespace Crystal.Pages.Substances.Density
 {
     public class DeleteModel : PageModel
     {

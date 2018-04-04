@@ -1,24 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Crystal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
-namespace Crystal.Pages.HeatTabl
+namespace Crystal.Pages.Substances.Heat
 {
-    public class DeleteModel : PageModel
+    public class DetailsModel : PageModel
     {
         private readonly Crystal.Models.CrystalContext _context;
 
-        public DeleteModel(Crystal.Models.CrystalContext context)
+        public DetailsModel(Crystal.Models.CrystalContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
         public HeatTablLanguage HeatTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
@@ -36,24 +32,6 @@ namespace Crystal.Pages.HeatTabl
                 return NotFound();
             }
             return Page();
-        }
-
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            HeatTablLanguage = await _context.HeatTablLanguage.FindAsync(id);
-
-            if (HeatTablLanguage != null)
-            {
-                _context.HeatTablLanguage.Remove(HeatTablLanguage);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
         }
     }
 }

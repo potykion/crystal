@@ -1,14 +1,12 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Crystal.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
-namespace Crystal.Pages.DensTabl
+namespace Crystal.Pages.Substances.Heat
 {
     public class EditModel : PageModel
     {
@@ -20,7 +18,7 @@ namespace Crystal.Pages.DensTabl
         }
 
         [BindProperty]
-        public DensTablLanguage DensTablLanguage { get; set; }
+        public HeatTablLanguage HeatTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -29,18 +27,14 @@ namespace Crystal.Pages.DensTabl
                 return NotFound();
             }
 
-            DensTablLanguage = await _context.DensTablLanguage
-                .Include(d => d.BknumberNavigation)
-                .Include(d => d.HeadClueNavigation)
-                .Include(d => d.SingTabl).FirstOrDefaultAsync(m => m.Id == id);
+            HeatTablLanguage = await _context.HeatTablLanguage
+                .Include(h => h.HeatTabl).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (DensTablLanguage == null)
+            if (HeatTablLanguage == null)
             {
                 return NotFound();
             }
-           ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-           ViewData["HeadClue"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
-           ViewData["HeadClue"] = new SelectList(_context.SingTabl, "HeadClue", "SingType");
+           ViewData["HeatTablId"] = new SelectList(_context.HeatTablInvariant, "Id", "Id");
             return Page();
         }
 
@@ -51,7 +45,7 @@ namespace Crystal.Pages.DensTabl
                 return Page();
             }
 
-            _context.Attach(DensTablLanguage).State = EntityState.Modified;
+            _context.Attach(HeatTablLanguage).State = EntityState.Modified;
 
             try
             {
@@ -59,7 +53,7 @@ namespace Crystal.Pages.DensTabl
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!DensTablLanguageExists(DensTablLanguage.Id))
+                if (!HeatTablLanguageExists(HeatTablLanguage.Id))
                 {
                     return NotFound();
                 }
@@ -72,9 +66,9 @@ namespace Crystal.Pages.DensTabl
             return RedirectToPage("./Index");
         }
 
-        private bool DensTablLanguageExists(int id)
+        private bool HeatTablLanguageExists(int id)
         {
-            return _context.DensTablLanguage.Any(e => e.Id == id);
+            return _context.HeatTablLanguage.Any(e => e.Id == id);
         }
     }
 }
