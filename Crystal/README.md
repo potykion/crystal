@@ -30,3 +30,6 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 12. [How to get query string parameter from MVC Razor markup?](https://stackoverflow.com/questions/11248064/how-to-get-query-string-parameter-from-mvc-razor-markup)
 13. [Razor Page - How to redirect to another folder's page using asp-for tag helper](https://stackoverflow.com/questions/45703640/razor-page-how-to-redirect-to-another-folders-page-using-asp-for-tag-helper)
 14. [Asp action route data](https://stackoverflow.com/questions/39096582/asp-action-route-data)
+15. [Globalization and localization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization)
+16. [Localization on _Layout.cshtml](https://stackoverflow.com/questions/43564843/localization-on-layout-cshtml?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
+17. [ASP.NET Core Localization with help of SharedResources](https://stackoverflow.com/questions/42647384/asp-net-core-localization-with-help-of-sharedresources?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)

@@ -1,3 +1,7 @@
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IHtmlLocalizer<SharedResources> sharedLocalizer;
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +34,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                
+
                 <li style="border-left: 1px solid gray">
-                    <a asp-page="/Substances/Index">Вещества</a>
+                    <a asp-page="/Substances/Index">@sharedLocalizer["Substances"]</a>
                 </li>
                 <li>
                     <a asp-page="/About">Поиск</a>
@@ -40,10 +44,10 @@
                 <li>
                     <a asp-page="/About">Глоссарий</a>
                 </li>
-                
-                
+
+
                 <li style="border-left: 1px solid gray">
-                    <a  asp-page="/Contact">О базе</a>
+                    <a asp-page="/Contact">О базе</a>
                 </li>
                 <li>
                     <a asp-page="/Contact">Разработчики</a>
@@ -51,7 +55,7 @@
                 <li>
                     <a asp-page="/Contact">Проекты</a>
                 </li>
-                
+
 
                 <li style="border-left: 1px solid gray">
                     <a asp-page="/Contact">Написать</a>
