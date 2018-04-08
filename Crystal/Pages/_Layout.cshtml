@@ -68,13 +68,20 @@
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; 2017 - Crystal</p>
+        <p style="display: inline;">&copy; 2017 - Crystal</p>
+
+        <div style="float: right">
+            <a href="#" id="ru">Русский</a> /
+            <a href="#" id="eng">English</a>
+        </div>
+
     </footer>
 </div>
 
 <environment include="Development">
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 </environment>
 <environment exclude="Development">
@@ -90,6 +97,7 @@
             crossorigin="anonymous"
             integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="~/js/site.min.js" asp-append-version="true"></script>
 </environment>
 

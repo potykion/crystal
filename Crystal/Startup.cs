@@ -39,18 +39,21 @@ namespace Crystal
             var supportedCultures = new List<CultureInfo>
             {
                 new CultureInfo("ru"),
-//                new CultureInfo("en")
+                new CultureInfo("en")
             };
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture("ru"),
                 SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures
+                SupportedUICultures = supportedCultures,
+                RequestCultureProviders = new List<IRequestCultureProvider>(new[]
+                {
+                    new CookieRequestCultureProvider()
+                })
             });
 
-            
-            
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
