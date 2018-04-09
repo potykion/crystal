@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
+using Crystal.Utils;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,7 +29,8 @@ namespace Crystal.Pages.Substances.Heat
             var heatTablValues = _context.HeatTablLanguage
                 .Include(h => h.HeatTabl)
                 .Include(h => h.HeatTabl.BknumberNavigation.BibliogrLanguage)
-                .Where(heat => heat.HeatTabl.HeadClue == headClue);
+                .Where(heat => heat.HeatTabl.HeadClue == headClue)
+                .Where(e => e.LanguageId == Request.GetLanguageId());
 
             HeatTablLanguage = await heatTablValues.ToListAsync();
         }
