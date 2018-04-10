@@ -1,0 +1,18 @@
+﻿@using System.Security.Claims
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
+
+<ul class="nav navbar-nav navbar-right">
+    @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+    {
+        <li>
+            <a>@HttpContextAccessor.HttpContext.User.Identity.Name</a>
+        </li>
+    }
+    else
+    {
+        <li>
+            <a asp-page="/Account/Login">Log in</a>
+        </li>
+    }
+
+</ul>

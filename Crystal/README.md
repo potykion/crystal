@@ -33,3 +33,5 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 15. [Globalization and localization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/localization)
 16. [Localization on _Layout.cshtml](https://stackoverflow.com/questions/43564843/localization-on-layout-cshtml?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
 17. [ASP.NET Core Localization with help of SharedResources](https://stackoverflow.com/questions/42647384/asp-net-core-localization-with-help-of-sharedresources?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
+18. [Use cookie authentication without ASP.NET Core Identity](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?tabs=aspnetcore2x)
+19. [Introduction to Identity on ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?tabs=visual-studio%2Caspnetcore2x)
