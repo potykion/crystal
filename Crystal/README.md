@@ -35,3 +35,6 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 17. [ASP.NET Core Localization with help of SharedResources](https://stackoverflow.com/questions/42647384/asp-net-core-localization-with-help-of-sharedresources?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)
 18. [Use cookie authentication without ASP.NET Core Identity](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/cookie?tabs=aspnetcore2x)
 19. [Introduction to Identity on ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity?tabs=visual-studio%2Caspnetcore2x)
+20. [Role-based authorization in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-2.1)
+21. [ASP.NET Core 2.0 - Razor - Authorize](https://stackoverflow.com/questions/46879041/asp-net-core-2-0-razor-authorize)
+22. [View-based authorization in ASP.NET Core MVC](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/views?view=aspnetcore-2.1&tabs=aspnetcore2x)

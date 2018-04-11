@@ -24,24 +24,28 @@ namespace Crystal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // add auth
+            // add authentication
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
-            
+
             // to get user in templates
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            
+
             // add localization
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
-            
+
+            // add authorization
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("Administrator"));
+            });
+
             // add DB
             var connection = Configuration.GetConnectionString("CrystalDatabase");
             services.AddDbContext<CrystalContext>(options => options.UseSqlServer(connection));
-            
-         
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,9 +68,9 @@ namespace Crystal
                     new CookieRequestCultureProvider()
                 })
             });
-            
+
             // use auth
-            app.UseAuthentication();            
+            app.UseAuthentication();
 
 
             if (env.IsDevelopment())

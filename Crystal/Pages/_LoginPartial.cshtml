@@ -1,11 +1,8 @@
-﻿@using System.Security.Claims
-@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor;
-
-<ul class="nav navbar-nav navbar-right">
-    @if (HttpContextAccessor.HttpContext.User.Identity.IsAuthenticated)
+﻿<ul class="nav navbar-nav navbar-right">
+    @if (User.Identity.IsAuthenticated)
     {
         <li>
-            <a>@HttpContextAccessor.HttpContext.User.Identity.Name</a>
+            <a>@User.Identity.Name</a>
         </li>
     }
     else
