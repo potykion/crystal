@@ -14,8 +14,8 @@ namespace Crystal.Models
 
         public int GetHeadClueBySystemUrl(string systemUrl)
         {
-            var headTablLanguage = _context.HeadTablLanguage.First(language => language.SystemUrl == systemUrl);
-            return headTablLanguage.HeadTablId;
+            var headTablLanguage = _context.HeadTablInvariant.First(language => language.SystemUrl == systemUrl);
+            return headTablLanguage.HeadClue;
         }
     }
 }

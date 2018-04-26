@@ -7,6 +7,7 @@ namespace Crystal.Models
     {
         public int HeadClue { get; set; }
         public string Referat { get; set; }
+        public int Id { get; set; }
         public int LanguageId { get; set; }
 
         public HeadTablInvariant HeadClueNavigation { get; set; }

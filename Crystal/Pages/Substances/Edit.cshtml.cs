@@ -51,7 +51,7 @@ namespace Crystal.Pages.Substances
             var updated = await TryUpdateModelAsync(
                 headTablToUpdate,
                 "HeadTablLanguage",
-                h => h.System, h => h.HeadTabl, h => h.Expert
+                h => h.HeadTabl, h => h.Expert
             );
 
             if (updated)
