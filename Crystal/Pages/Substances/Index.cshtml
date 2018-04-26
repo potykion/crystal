@@ -24,13 +24,35 @@
 
 <div class="row">
 
-    @foreach (var item in Model.HeadTablLanguage)
+    <h3>Соединения</h3>
+</div>
+
+<div class="row">
+
+    @foreach (var item in Model.HeadTablClass0)
     {
-        <div class="col-md-3 col-sm-6">
+        <div class="col-md-3 col-sm-4">
             <a asp-page="./Properties"
-               asp-route-systemurl="@item.SystemUrl">
-                @Html.Raw(item.System)
+               asp-route-systemurl="@item.HeadTabl.SystemUrl">
+                @Html.Raw(item.HeadTabl.System)
             </a>
         </div>
     }
+</div>
+<div class="row">
+
+    <h3>Лангаситы</h3>
+</div>
+<div class="row">
+
+    @foreach (var item in Model.HeadTablClass1)
+    {
+        <div class="col-md-3 col-sm-4">
+            <a asp-page="./Properties"
+               asp-route-systemurl="@item.HeadTabl.SystemUrl">
+                @Html.Raw(item.HeadTabl.System)
+            </a>
+        </div>
+    }
+
 </div>
