@@ -8,22 +8,28 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Crystal.Pages.Substances
 {
-    public class PropertiesIndex : PageModel
+    public class SubstanceInfoModel : PageModel
     {
         private readonly List<string> _availableProperties =
             new List<string> {"HeatTabl", "DensTabl"};
 
         private readonly CrystalContext _context;
 
-        public PropertiesIndex(CrystalContext context)
+        public SubstanceInfoModel(CrystalContext context)
         {
             _context = context;
         }
 
+        public HeadTablLanguage HeadTablLanguage { get; set; }
         public IList<PropertiesLanguage> PropertiesLanguage { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(string systemUrl)
         {
+            HeadTablLanguage = await _context.HeadTablLanguage
+                .Include(headTabl => headTabl.HeadTabl)
+                .Where(headTabl => headTabl.HeadTabl.SystemUrl == systemUrl)
+                .FirstAsync();
+
             PropertiesLanguage = await _context.PropertiesLanguage
                 .Include(p => p.Properties)
                 .Where(p => _availableProperties.Contains(p.Properties.TableName))

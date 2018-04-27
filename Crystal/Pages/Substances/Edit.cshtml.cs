@@ -17,17 +17,12 @@ namespace Crystal.Pages.Substances
 
         [BindProperty] public HeadTablLanguage HeadTablLanguage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(string systemUrl)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             HeadTablLanguage = await _context.HeadTablLanguage
                 .Include(h => h.HeadTabl)
                 .AsNoTracking()
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.HeadTabl.SystemUrl == systemUrl);
 
             if (HeadTablLanguage == null)
             {

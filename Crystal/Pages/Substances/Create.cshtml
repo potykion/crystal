@@ -8,28 +8,24 @@
 
 <h2>Create</h2>
 
-<h4>HeadTablLanguage</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="HeadTablLanguage.HeadTablId" class="control-label"></label>
-                <select asp-for="HeadTablLanguage.HeadTablId" class ="form-control" asp-items="ViewBag.HeadTablId"></select>
-            </div>
+
             <div class="form-group">
                 <label asp-for="HeadTablLanguage.Expert" class="control-label"></label>
-                <input asp-for="HeadTablLanguage.Expert" class="form-control" />
+                <input asp-for="HeadTablLanguage.Expert" class="form-control"/>
                 <span asp-validation-for="HeadTablLanguage.Expert" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HeadTablLanguage.System" class="control-label"></label>
-                <input asp-for="HeadTablLanguage.System" class="form-control" />
-                <span asp-validation-for="HeadTablLanguage.System" class="text-danger"></span>
+                <label asp-for="HeadTablLanguage.HeadTabl.System" class="control-label"></label>
+                <input asp-for="HeadTablLanguage.HeadTabl.System" class="form-control"/>
+                <span asp-validation-for="HeadTablLanguage.HeadTabl.System" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </form>
     </div>
@@ -40,5 +36,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

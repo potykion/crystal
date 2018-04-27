@@ -19,7 +19,6 @@ namespace Crystal.Pages.Substances
 
         public IActionResult OnGet()
         {
-            ViewData["HeadTablId"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
             return Page();
         }
 

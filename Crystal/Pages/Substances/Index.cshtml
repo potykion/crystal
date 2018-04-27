@@ -21,38 +21,34 @@
     </p>
 }
 
-
 <div class="row">
-
     <h3>Соединения</h3>
 </div>
 
 <div class="row">
-
     @foreach (var item in Model.HeadTablClass0)
     {
         <div class="col-md-3 col-sm-4">
-            <a asp-page="./Properties"
+            <a asp-page="./Details"
                asp-route-systemurl="@item.HeadTabl.SystemUrl">
                 @Html.Raw(item.HeadTabl.System)
             </a>
         </div>
     }
 </div>
-<div class="row">
 
+<div class="row">
     <h3>Лангаситы</h3>
 </div>
-<div class="row">
 
+<div class="row">
     @foreach (var item in Model.HeadTablClass1)
     {
         <div class="col-md-3 col-sm-4">
-            <a asp-page="./Properties"
+            <a asp-page="./Details"
                asp-route-systemurl="@item.HeadTabl.SystemUrl">
                 @Html.Raw(item.HeadTabl.System)
             </a>
         </div>
     }
-
 </div>
