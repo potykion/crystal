@@ -1,0 +1,96 @@
+@page
+@model Crystal.Pages.Substances.Thermal_Expansion.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].DataType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].Temper1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].Temper2)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].Znak1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].S11)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].ErrHexp)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].MethodEx)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].MethodEx1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].LanguageId)
+                </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].BknumberNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].SingTabl)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.HeatExpnLanguage) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temper1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temper2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Znak1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.S11)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ErrHexp)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MethodEx)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MethodEx1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LanguageId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BknumberNavigation.Bknumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SingTabl.SingType)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

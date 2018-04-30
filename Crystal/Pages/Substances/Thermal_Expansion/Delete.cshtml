@@ -1,0 +1,88 @@
+@page
+@model Crystal.Pages.Substances.Thermal_Expansion.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>HeatExpnLanguage</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.DataType)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.DataType)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.Temper1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.Temper1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.Temper2)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.Temper2)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.Znak1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.Znak1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.S11)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.S11)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.ErrHexp)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.ErrHexp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.MethodEx)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.MethodEx)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.MethodEx1)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.MethodEx1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.LanguageId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.LanguageId)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.BknumberNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.BknumberNavigation.Bknumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.HeatExpnLanguage.SingTabl)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HeatExpnLanguage.SingTabl.SingType)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="HeatExpnLanguage.Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

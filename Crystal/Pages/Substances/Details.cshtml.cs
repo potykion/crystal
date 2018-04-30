@@ -11,7 +11,7 @@ namespace Crystal.Pages.Substances
     public class SubstanceInfoModel : PageModel
     {
         private readonly List<string> _availableProperties =
-            new List<string> {"HeatTabl", "DensTabl"};
+            new List<string> {"HeatTabl", "DensTabl", "HeatExpn0"};
 
         private readonly CrystalContext _context;
 
