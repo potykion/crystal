@@ -30,7 +30,7 @@ namespace Crystal.Pages.Substances.Heat
                 .Include(h => h.HeatTabl)
                 .Include(h => h.HeatTabl.BknumberNavigation.BibliogrLanguage)
                 .Where(heat => heat.HeatTabl.HeadClue == headClue)
-                .Where(e => e.LanguageId == Request.GetLanguageId());
+                .Where(e => e.LanguageId == RouteData.GetLanguageId());
 
             HeatTablLanguage = await heatTablValues.ToListAsync();
         }

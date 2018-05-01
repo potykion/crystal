@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Crystal.Models;
+using Crystal.Utils;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Localization.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +36,9 @@ namespace Crystal
             // add localization
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.AddMvc()
+                .AddRazorPagesOptions(options =>
+                    options.Conventions.Add(new GlobalTemplatePageRouteModelConvention())
+                )
                 .AddViewLocalization()
                 .AddDataAnnotationsLocalization();
 
@@ -58,16 +63,22 @@ namespace Crystal
                 new CultureInfo("en")
             };
 
-            app.UseRequestLocalization(new RequestLocalizationOptions
+            var requestLocalizationOptions = new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture("ru"),
                 SupportedCultures = supportedCultures,
                 SupportedUICultures = supportedCultures,
-                RequestCultureProviders = new List<IRequestCultureProvider>(new[]
+            };
+            requestLocalizationOptions.RequestCultureProviders = new List<IRequestCultureProvider>(
+                new RequestCultureProvider[]
                 {
+                    new CustomRouteDataRequestCultureProvider
+                    {
+                        Options = requestLocalizationOptions
+                    },
                     new CookieRequestCultureProvider()
-                })
-            });
+                });
+            app.UseRequestLocalization(requestLocalizationOptions);
 
             // use auth
             app.UseAuthentication();

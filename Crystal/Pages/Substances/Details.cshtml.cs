@@ -33,7 +33,7 @@ namespace Crystal.Pages.Substances
             PropertiesLanguage = await _context.PropertiesLanguage
                 .Include(p => p.Properties)
                 .Where(p => _availableProperties.Contains(p.Properties.TableName))
-                .Where(p => p.LanguageId == Request.GetLanguageId())
+                .Where(p => p.LanguageId == RouteData.GetLanguageId())
                 .ToListAsync();
         }
     }
