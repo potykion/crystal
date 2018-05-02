@@ -59,31 +59,35 @@ namespace Crystal.Pages.Account
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, user.Email),
-                    new Claim(ClaimTypes.Role, "Administrator"),
+                    new Claim(ClaimTypes.Role, user.Role),
                 };
 
-                var claimsIdentity = new ClaimsIdentity(
-                    claims,
-                    CookieAuthenticationDefaults.AuthenticationScheme
-                );
-
-                var authProperties = new AuthenticationProperties
-                {
-                    IsPersistent = true,
-                };
-
-                await HttpContext.SignInAsync(
-                    CookieAuthenticationDefaults.AuthenticationScheme,
-                    new ClaimsPrincipal(claimsIdentity),
-                    authProperties
-                );
-
+                await SaveClaimsToCookie(claims);
 
                 return RedirectToPage(returnUrl);
             }
 
             // Something failed. Redisplay the form.
             return Page();
+        }
+
+        private async Task SaveClaimsToCookie(List<Claim> claims)
+        {
+            var claimsIdentity = new ClaimsIdentity(
+                claims,
+                CookieAuthenticationDefaults.AuthenticationScheme
+            );
+
+            var authProperties = new AuthenticationProperties
+            {
+                IsPersistent = true,
+            };
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties
+            );
         }
 
         private async Task<User> AuthenticateUser(string email, string password)
@@ -99,6 +103,7 @@ namespace Crystal.Pages.Account
                 return new User
                 {
                     Email = "potykion@gmail.com",
+                    Role = "Administrator"
                 };
             }
 
