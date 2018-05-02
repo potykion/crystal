@@ -21,6 +21,7 @@ namespace Crystal.Pages.Substances.Heat
         }
 
         public IList<HeatTablLanguage> HeatTablLanguage { get; set; }
+        public IDictionary<int, BibliogrLanguage> References { get; set; }
 
         public async Task OnGetAsync(string systemUrl)
         {
@@ -33,6 +34,16 @@ namespace Crystal.Pages.Substances.Heat
                 .Where(e => e.LanguageId == RouteData.GetLanguageId());
 
             HeatTablLanguage = await heatTablValues.ToListAsync();
+
+            var bibliogrLanguage = await _context.BibliogrLanguage
+                .Include(b => b.Bibliogr)
+                .Where(b => b.LanguageId == RouteData.GetLanguageId())
+                .ToDictionaryAsync(b => b.BibliogrId, b => b);
+
+            References = HeatTablLanguage
+                .ToDictionary(h => h.HeatTablId, h =>
+                    h.HeatTabl.Bknumber.HasValue ? bibliogrLanguage[(int) h.HeatTabl.Bknumber] : null
+                );
         }
     }
 }

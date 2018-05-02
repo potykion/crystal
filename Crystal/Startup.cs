@@ -46,6 +46,7 @@ namespace Crystal
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("AdminOnly", policy => policy.RequireRole("Administrator"));
+                options.AddPolicy("UserOnly", policy => policy.RequireRole("User", "Administrator"));
             });
 
             // add DB
