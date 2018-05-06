@@ -26,7 +26,7 @@ namespace Crystal.Pages.Substances
         {
             var headTablLanguage = _context.HeadTablLanguage
                 .Include(h => h.HeadTabl)
-                .Where(h => h.LanguageId == RouteData.GetLanguageId());
+                .Where(h => h.LanguageId == this.GetLanguageId());
 
             HeadTablClass0 = await headTablLanguage.Where(headTabl => headTabl.HeadTabl.Class == 0).ToListAsync();
             HeadTablClass1 = await headTablLanguage

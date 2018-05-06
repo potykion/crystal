@@ -31,13 +31,13 @@ namespace Crystal.Pages.Substances.Heat
                 .Include(h => h.HeatTabl)
                 .Include(h => h.HeatTabl.BknumberNavigation.BibliogrLanguage)
                 .Where(heat => heat.HeatTabl.HeadClue == headClue)
-                .Where(e => e.LanguageId == RouteData.GetLanguageId());
+                .Where(e => e.LanguageId == this.GetLanguageId());
 
             HeatTablLanguage = await heatTablValues.ToListAsync();
 
             var bibliogrLanguage = await _context.BibliogrLanguage
                 .Include(b => b.Bibliogr)
-                .Where(b => b.LanguageId == RouteData.GetLanguageId())
+                .Where(b => b.LanguageId == this.GetLanguageId())
                 .ToDictionaryAsync(b => b.BibliogrId, b => b);
 
             References = HeatTablLanguage
