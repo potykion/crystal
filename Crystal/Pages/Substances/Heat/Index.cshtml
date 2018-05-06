@@ -64,6 +64,10 @@
             </td>
             @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
             {
+                
+//                todo /ru/PDF/{BibliogrId}.pdf - link to pdf download (as view)
+                // todo same for pictures (GrafTabl) (соединение: LiNbO3  > сингония: ромбоэдрическая > Распространение и затухание упругих волн > Рисунки)
+                // http://crystal.server2014.imet-db.ru/ru/properties/picture.asp?pic=alo953&propm=%D0%E8%F1.953%20%20[%D0%E8%F1%F3%ED%EA%E8%20%C1%C4%20%CA%F0%E8%F1%F2%E0%EB%EB]
                 <td>
                     <a data-toggle="popover" data-placement="right" data-content="@Html.Raw(Model.References[item.HeatTablId])">
                         @Model.References[item.HeatTablId].BibliogrId
