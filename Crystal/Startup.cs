@@ -36,7 +36,9 @@ namespace Crystal
 
             // add localization
             services.AddLocalization(options => options.ResourcesPath = "Resources");
-            services.AddMvc()
+            services.AddMvc(options =>
+                    options.Filters.Add(new LanguageFilter(SupportedCultures))
+                )
                 .AddRazorPagesOptions(options =>
                     options.Conventions.Add(new GlobalTemplatePageRouteModelConvention())
                 )
@@ -59,17 +61,12 @@ namespace Crystal
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             // use localization
-            var supportedCultures = new List<CultureInfo>
-            {
-                new CultureInfo("ru"),
-                new CultureInfo("en")
-            };
 
             var requestLocalizationOptions = new RequestLocalizationOptions
             {
                 DefaultRequestCulture = new RequestCulture("ru"),
-                SupportedCultures = supportedCultures,
-                SupportedUICultures = supportedCultures,
+                SupportedCultures = SupportedCultures,
+                SupportedUICultures = SupportedCultures,
             };
             requestLocalizationOptions.RequestCultureProviders = new List<IRequestCultureProvider>(
                 new RequestCultureProvider[]
@@ -99,5 +96,11 @@ namespace Crystal
 
             app.UseMvc();
         }
+
+        public IList<CultureInfo> SupportedCultures => new List<CultureInfo>
+        {
+            new CultureInfo("ru"),
+            new CultureInfo("en")
+        };
     }
 }
