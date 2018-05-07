@@ -8,14 +8,29 @@
 }
 
 
-<h3>Соединения</h3>
+<h3>Поиск</h3>
+
+<form>
+    <div class="form-group">
+        <label for="system">Состав</label>
+        <input type="text" class="form-control" id="system" name="system" placeholder="NaCl">
+
+    </div>
+    <button type="submit" class="btn btn-default">Поиск</button>
+
+</form>
+
+
+<h3>Результаты поиска</h3>
 
 <div class="row">
-    <form>
-        <div class="form-group">
-            <label for="system">Состав</label>
-            <input type="text" class="form-control" id="system" placeholder="NaCl">
+    @foreach (var item in Model.HeadTabl)
+    {
+        <div class="col-md-3 col-sm-4">
+            <a asp-page="./Details"
+               asp-route-systemurl="@item.HeadTabl.SystemUrl">
+                @Html.Raw(item.HeadTabl.System)
+            </a>
         </div>
-    </form>
-
+    }
 </div>

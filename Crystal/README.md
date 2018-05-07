@@ -40,3 +40,4 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 22. [View-based authorization in ASP.NET Core MVC](https://docs.microsoft.com/en-us/aspnet/core/security/authorization/views?view=aspnetcore-2.1&tabs=aspnetcore2x)
 23. [Razor Pages route and app convention features in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/razor-pages/razor-pages-conventions?view=aspnetcore-2.1)
 24. [URL Rewriting Middleware in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/url-rewriting?view=aspnetcore-2.1&tabs=aspnetcore2x)
+25. [Add search to ASP.NET Core Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/search?view=aspnetcore-2.1)

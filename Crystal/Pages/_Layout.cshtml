@@ -36,31 +36,16 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
 
-                <li style="border-left: 1px solid gray">
+                <li >
                     <a asp-page="/Substances/Index">@SharedLocalizer["Substances"]</a>
                 </li>
                 <li>
-                    <a asp-page="/About">Поиск</a>
+                    <a asp-page="/Substances/Search">Поиск</a>
                 </li>
                 <li>
                     <a asp-page="/About">Глоссарий</a>
                 </li>
 
-
-                <li style="border-left: 1px solid gray">
-                    <a asp-page="/Contact">О базе</a>
-                </li>
-                <li>
-                    <a asp-page="/Contact">Разработчики</a>
-                </li>
-                <li>
-                    <a asp-page="/Contact">Проекты</a>
-                </li>
-
-
-                <li style="border-left: 1px solid gray">
-                    <a asp-page="/Contact">Написать</a>
-                </li>
 
             </ul>
             @await Html.PartialAsync("_LoginPartial")
