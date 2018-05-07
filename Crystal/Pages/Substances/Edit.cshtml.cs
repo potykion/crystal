@@ -16,6 +16,7 @@ namespace Crystal.Pages.Substances
         }
 
         [BindProperty] public HeadTablLanguage HeadTablLanguage { get; set; }
+        [BindProperty] public HeadTablInvariant HeadTablInvariant { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string systemUrl)
         {
@@ -24,35 +25,30 @@ namespace Crystal.Pages.Substances
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.HeadTabl.SystemUrl == systemUrl);
 
-            if (HeadTablLanguage == null)
-            {
-                return NotFound();
-            }
+            HeadTablInvariant = HeadTablLanguage.HeadTabl;
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(string systemUrl)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
-
             var headTablToUpdate = await _context.HeadTablLanguage
                 .Include(h => h.HeadTabl)
-                .FirstOrDefaultAsync(h => h.Id == id);
+                .FirstOrDefaultAsync(m => m.HeadTabl.SystemUrl == systemUrl);
 
-            var updated = await TryUpdateModelAsync(
+            await TryUpdateModelAsync(
                 headTablToUpdate,
                 "HeadTablLanguage",
-                h => h.HeadTabl, h => h.Expert
+                h => h.Expert
             );
 
-            if (updated)
-            {
-                await _context.SaveChangesAsync();
-            }
+            await TryUpdateModelAsync(
+                headTablToUpdate.HeadTabl,
+                "HeadTablInvariant",
+                h => h.Help, h => h.System
+            );
+
+            await _context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

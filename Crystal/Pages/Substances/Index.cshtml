@@ -30,8 +30,7 @@
     @foreach (var item in Model.HeadTablClass0)
     {
         <div class="col-md-3 col-sm-4">
-            <a asp-page="./Details"
-               asp-route-systemurl="@item.HeadTabl.SystemUrl">
+            <a href="@UrlBuilder.BuildSubstanceLink(Model.GetLanguage(), item.HeadTabl.SystemUrl, "Details")">
                 @Html.Raw(item.HeadTabl.System)
             </a>
         </div>
@@ -44,8 +43,7 @@
     @foreach (var item in Model.HeadTablClass1)
     {
         <div class="col-md-3 col-sm-4">
-            <a asp-page="./Details"
-               asp-route-systemurl="@item.HeadTabl.SystemUrl">
+            <a href="@UrlBuilder.BuildSubstanceLink(Model.GetLanguage(), item.HeadTabl.SystemUrl, "Details")">
                 @Html.Raw(item.HeadTabl.System)
             </a>
         </div>

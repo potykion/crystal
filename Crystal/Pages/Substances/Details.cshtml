@@ -1,6 +1,8 @@
 ﻿@page "{systemUrl}"
 @using Substances
+@using Utils
 @model Substances.SubstanceInfoModel
+@inject UrlBuilder UrlBuilder;
 
 @{
     ViewData["Title"] = Model.HeadTablLanguage.HeadTabl.SystemUrl;
@@ -25,12 +27,12 @@
 <h3>Actions</h3>
 
 <div>
-    <a asp-page="./Edit"
-       asp-route-systemUrl='@ViewContext.RouteData.Values["systemUrl"]'>
+    <a href="@UrlBuilder.BuildSubstanceLink(
+                 Model.GetLanguage(),
+                 ViewContext.RouteData.Values["systemUrl"] as string,
+                 "Edit")">
         Edit
     </a>
-
-    <a>Delete</a>
 </div>
 
 <h3>Properties</h3>

@@ -4,8 +4,6 @@ namespace Crystal.Utils
 {
     public class GlobalTemplatePageRouteModelConvention : IPageRouteModelConvention
     {
-        // todo {lang} required (404 without lang)
-        
         public void Apply(PageRouteModel model)
         {
             var selectorCount = model.Selectors.Count;
