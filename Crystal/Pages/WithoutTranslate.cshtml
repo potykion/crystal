@@ -1,0 +1,33 @@
+﻿@page
+@model WithoutTranslateModel
+
+
+<h3>Записи без перевода</h3>
+
+<h4>HeadTabl</h4>
+
+<h5>Без английского перевода</h5>
+<div class="row">
+    @foreach (var item in Model.HeadTablWithoutEnglish)
+    {
+        <div class="col-md-3 col-sm-4">
+            <a asp-page="./Details"
+               asp-route-systemurl="@item.SystemUrl">
+                @Html.Raw(item.System)
+            </a>
+        </div>
+    }
+</div>
+
+<h5>Без русского перевода</h5>
+<div class="row">
+    @foreach (var item in Model.HeadTablWithoutRussian)
+    {
+        <div class="col-md-3 col-sm-4">
+            <a asp-page="./Details"
+               asp-route-systemurl="@item.SystemUrl">
+                @Html.Raw(item.System)
+            </a>
+        </div>
+    }
+</div>
