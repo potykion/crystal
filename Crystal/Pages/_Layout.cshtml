@@ -1,6 +1,7 @@
 @using Microsoft.AspNetCore.Mvc.Localization
+@using Utils
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer;
-
+@inject UrlBuilder UrlBuilder;
 
 <!DOCTYPE html>
 <html>
@@ -74,8 +75,8 @@
         <p style="display: inline;">&copy; 2017 - Crystal</p>
 
         <div style="float: right">
-            <a href="#" id="ru">Русский</a> /
-            <a href="#" id="eng">English</a>
+            <a href="@UrlBuilder.ChangeLanguageUrl(Context.Request.Path, "ru")">Русский</a> /
+            <a href="@UrlBuilder.ChangeLanguageUrl(Context.Request.Path, "en")">English</a>
         </div>
 
     </footer>

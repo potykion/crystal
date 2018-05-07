@@ -25,11 +25,12 @@ namespace Crystal.Pages.Substances.Density
                 return NotFound();
             }
 
-            DensTablLanguage = await _context.DensTablLanguage
-                .Include(d => d.BknumberNavigation)
-                .Include(d => d.HeadClueNavigation)
-                .Include(d => d.SingTabl).FirstOrDefaultAsync(m => m.Id == id);
 
+            DensTablLanguage = await _context.DensTablLanguage
+                .Include(d => d.DensTabl)
+                .Include(d => d.DensTabl.HeadClueNavigation)
+                .Include(d => d.DensTabl.SingCode).FirstOrDefaultAsync(m => m.Id == id);
+            
             if (DensTablLanguage == null)
             {
                 return NotFound();

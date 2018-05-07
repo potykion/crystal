@@ -17,8 +17,7 @@ namespace Crystal.Pages.Substances.Density
             _context = context;
         }
 
-        [BindProperty]
-        public DensTablLanguage DensTablLanguage { get; set; }
+        [BindProperty] public DensTablLanguage DensTablLanguage { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -28,17 +27,19 @@ namespace Crystal.Pages.Substances.Density
             }
 
             DensTablLanguage = await _context.DensTablLanguage
-                .Include(d => d.BknumberNavigation)
-                .Include(d => d.HeadClueNavigation)
-                .Include(d => d.SingTabl).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(d => d.DensTabl)
+                .Include(d => d.DensTabl.BknumberNavigation)
+                .Include(d => d.DensTabl.HeadClueNavigation)
+                .Include(d => d.DensTabl.SingTabl).FirstOrDefaultAsync(m => m.Id == id);
 
             if (DensTablLanguage == null)
             {
                 return NotFound();
             }
-           ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-           ViewData["HeadClue"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
-           ViewData["HeadClue"] = new SelectList(_context.SingTabl, "HeadClue", "SingType");
+
+            ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
+            ViewData["HeadClue"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
+            ViewData["HeadClue"] = new SelectList(_context.SingTabl, "HeadClue", "SingType");
             return Page();
         }
 

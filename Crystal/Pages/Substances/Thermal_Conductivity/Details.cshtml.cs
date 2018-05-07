@@ -28,13 +28,16 @@ namespace Crystal.Pages.Substances.Thermal_Conductivity
             }
 
             HeatExpnLanguage = await _context.HeatExpnLanguage
-                .Include(h => h.BknumberNavigation)
-                .Include(h => h.SingTabl).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(h => h.HeatExpn)
+                .Include(h => h.HeatExpn.BknumberNavigation)
+                .Include(h => h.HeatExpn.SingTabl)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
             if (HeatExpnLanguage == null)
             {
                 return NotFound();
             }
+
             return Page();
         }
     }

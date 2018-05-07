@@ -26,7 +26,9 @@ namespace Crystal.Pages.Substances.Density
             var headClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
 
             var densTablValues = _context.DensTablLanguage
-                .Where(d => d.HeadClue == headClue);
+                .Include(d => d.DensTabl)
+                .Include(d => d.DensTabl.SingTabl)
+                .Where(d => d.DensTabl.HeadClue == headClue);
 
             SingTabl = await _context.SingTabl
                 .Where(s => s.HeadClue == headClue)
@@ -35,7 +37,7 @@ namespace Crystal.Pages.Substances.Density
 
             if (singClue.HasValue)
             {
-                densTablValues = densTablValues.Where(d => d.SingTabl.SingClue == singClue);
+                densTablValues = densTablValues.Where(d => d.DensTabl.SingTabl.SingClue == singClue);
             }
 
             DensTablLanguage = await densTablValues.ToListAsync();

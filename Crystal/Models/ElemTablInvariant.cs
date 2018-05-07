@@ -12,7 +12,6 @@ namespace Crystal.Models
 
         public int HeadClue { get; set; }
         public string SingCode { get; set; }
-        public string Nazbparam { get; set; }
         public double? Znparam { get; set; }
         public double? Errparam { get; set; }
         public string NazvAngl { get; set; }

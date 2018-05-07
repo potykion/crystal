@@ -8,20 +8,20 @@ namespace Crystal.Models
         public HeadTablInvariant()
         {
             AcOpTablInvariant = new HashSet<AcOpTablInvariant>();
-            CuryTablLanguage = new HashSet<CuryTablLanguage>();
-            DecrTablLanguage = new HashSet<DecrTablLanguage>();
-            DensTablLanguage = new HashSet<DensTablLanguage>();
+            CuryTablInvariant = new HashSet<CuryTablInvariant>();
+            DecrTablInvariant = new HashSet<DecrTablInvariant>();
+            DensTablInvariant = new HashSet<DensTablInvariant>();
             EquationTabl = new HashSet<EquationTabl>();
-            GrafTablLanguage = new HashSet<GrafTablLanguage>();
-            HardTablLanguage = new HashSet<HardTablLanguage>();
+            GrafTablInvariant = new HashSet<GrafTablInvariant>();
+            HardTablInvariant = new HashSet<HardTablInvariant>();
             HeadTablLanguage = new HashSet<HeadTablLanguage>();
             HeatTablInvariant = new HashSet<HeatTablInvariant>();
             LitrTabl = new HashSet<LitrTabl>();
-            PlavTablLanguage = new HashSet<PlavTablLanguage>();
+            PlavTablInvariant = new HashSet<PlavTablInvariant>();
             RefrTablLanguage = new HashSet<RefrTablLanguage>();
             SingTabl = new HashSet<SingTabl>();
             SistTabl = new HashSet<SistTabl>();
-            SuspTablLanguage = new HashSet<SuspTablLanguage>();
+            SuspTablInvariant = new HashSet<SuspTablInvariant>();
             Wavepure = new HashSet<Wavepure>();
         }
 
@@ -32,20 +32,20 @@ namespace Crystal.Models
         public string SystemUrl { get; set; }
 
         public ICollection<AcOpTablInvariant> AcOpTablInvariant { get; set; }
-        public ICollection<CuryTablLanguage> CuryTablLanguage { get; set; }
-        public ICollection<DecrTablLanguage> DecrTablLanguage { get; set; }
-        public ICollection<DensTablLanguage> DensTablLanguage { get; set; }
+        public ICollection<CuryTablInvariant> CuryTablInvariant { get; set; }
+        public ICollection<DecrTablInvariant> DecrTablInvariant { get; set; }
+        public ICollection<DensTablInvariant> DensTablInvariant { get; set; }
         public ICollection<EquationTabl> EquationTabl { get; set; }
-        public ICollection<GrafTablLanguage> GrafTablLanguage { get; set; }
-        public ICollection<HardTablLanguage> HardTablLanguage { get; set; }
+        public ICollection<GrafTablInvariant> GrafTablInvariant { get; set; }
+        public ICollection<HardTablInvariant> HardTablInvariant { get; set; }
         public ICollection<HeadTablLanguage> HeadTablLanguage { get; set; }
         public ICollection<HeatTablInvariant> HeatTablInvariant { get; set; }
         public ICollection<LitrTabl> LitrTabl { get; set; }
-        public ICollection<PlavTablLanguage> PlavTablLanguage { get; set; }
+        public ICollection<PlavTablInvariant> PlavTablInvariant { get; set; }
         public ICollection<RefrTablLanguage> RefrTablLanguage { get; set; }
         public ICollection<SingTabl> SingTabl { get; set; }
         public ICollection<SistTabl> SistTabl { get; set; }
-        public ICollection<SuspTablLanguage> SuspTablLanguage { get; set; }
+        public ICollection<SuspTablInvariant> SuspTablInvariant { get; set; }
         public ICollection<Wavepure> Wavepure { get; set; }
     }
 }

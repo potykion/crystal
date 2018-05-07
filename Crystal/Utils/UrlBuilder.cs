@@ -32,7 +32,6 @@ namespace Crystal.Utils
             return $"/{language}/Substances/{propertyUrl}/{method}/{systemUrl}";
         }
 
-        // todo language toggle link as ChangeLanguageUrl call
         public string ChangeLanguageUrl(string url, string language)
         {
             var urlWithoutLanguage = url.Substring(url.IndexOf("/", 1, StringComparison.Ordinal));

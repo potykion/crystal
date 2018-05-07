@@ -23,9 +23,10 @@ namespace Crystal.Pages.Substances.Thermal_Expansion
         public async Task OnGetAsync()
         {
             HeatExpnLanguage = await _context.HeatExpnLanguage
-                .Where(h => h.DataType == 0)
-                .Include(h => h.BknumberNavigation)
-                .Include(h => h.SingTabl)
+                .Include(h => h.HeatExpn)
+                .Include(h => h.HeatExpn.BknumberNavigation)
+                .Include(h => h.HeatExpn.SingTabl)
+                .Where(h => h.HeatExpn.DataType == 0)
                 .ToListAsync();
         }
     }
