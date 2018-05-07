@@ -34,7 +34,15 @@ namespace Crystal.Utils
 
         public string ChangeLanguageUrl(string url, string language)
         {
-            var urlWithoutLanguage = url.Substring(url.IndexOf("/", 1, StringComparison.Ordinal));
+            var urlWithoutLanguage = url;
+            try
+            {
+                urlWithoutLanguage = url.Substring(url.IndexOf("/", 1, StringComparison.Ordinal));
+            }
+            catch (ArgumentOutOfRangeException e)
+            {
+            }
+
             return $"/{language}{urlWithoutLanguage}";
         }
     }
