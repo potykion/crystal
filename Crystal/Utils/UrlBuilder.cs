@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Crystal.Utils
 {
@@ -21,16 +23,30 @@ namespace Crystal.Utils
             }
         }
 
-        // todo pass to href
-        public string BuildPropertyLink(string language, string systemUrl, string propertyUrl, string method = "Index")
+        public string BuildPropertyLink(
+            string language, string property, string method = "Index", string system = "", string queryParams = ""
+        )
         {
-            if (method != "Edit" && method != "Create" && method != "Delete")
+            var resultUrl = $"/{language}/Substances/{property}";
+
+            if (method == "Edit" || method == "Create" || method == "Delete")
             {
-                return $"/{language}/Substances/{propertyUrl}/{systemUrl}";
+                resultUrl = $"{resultUrl}/{method}";
             }
 
-            return $"/{language}/Substances/{propertyUrl}/{method}/{systemUrl}";
+            if (!string.IsNullOrEmpty(system))
+            {
+                resultUrl = $"{resultUrl}/{system}";
+            }
+
+            if (!string.IsNullOrEmpty(queryParams))
+            {
+                resultUrl = $"{resultUrl}?{queryParams}";
+            }
+
+            return resultUrl;
         }
+
 
         public string ChangeLanguageUrl(string url, string language)
         {

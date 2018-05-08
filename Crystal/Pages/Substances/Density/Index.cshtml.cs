@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
+using Crystal.Utils;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,28 +20,45 @@ namespace Crystal.Pages.Substances.Density
         }
 
         public IList<DensTablLanguage> DensTablLanguage { get; set; }
+        
+        public IDictionary<int, BibliogrLanguage> References { get; set; }
+        
+        
         public IList<SingTabl> SingTabl { get; set; }
+        
 
-        public async Task OnGetAsync(string systemUrl, int? singClue)
+        public async Task OnGetAsync(string systemUrl , string sing)
         {
             var headClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
 
-            var densTablValues = _context.DensTablLanguage
-                .Include(d => d.DensTabl)
-                .Include(d => d.DensTabl.SingTabl)
-                .Where(d => d.DensTabl.HeadClue == headClue);
+            var substanceDensTabl = _context.DensTablLanguage
+                .Include(m => m.DensTabl)
+                .Where(m => m.DensTabl.HeadClue == headClue)
+                .Where(m => m.LanguageId == this.GetLanguageId());
+
+            
+            if (!string.IsNullOrEmpty(sing))
+            {
+                substanceDensTabl = substanceDensTabl.Where(m => m.DensTabl.SingCode == sing);
+            }
+            
+
+            DensTablLanguage = await substanceDensTabl.ToListAsync();
 
             SingTabl = await _context.SingTabl
                 .Where(s => s.HeadClue == headClue)
                 .ToListAsync();
+            
+            var bibliogrLanguage = await _context.BibliogrLanguage
+                .Include(b => b.Bibliogr)
+                .Where(b => b.LanguageId == this.GetLanguageId())
+                .ToDictionaryAsync(b => b.BibliogrId, b => b);
 
-
-            if (singClue.HasValue)
-            {
-                densTablValues = densTablValues.Where(d => d.DensTabl.SingTabl.SingClue == singClue);
-            }
-
-            DensTablLanguage = await densTablValues.ToListAsync();
+            References = DensTablLanguage
+                .ToDictionary(h => h.DensTablId, h =>
+                    h.DensTabl.Bknumber.HasValue ? bibliogrLanguage[(int) h.DensTabl.Bknumber] : null
+                );
+            
         }
     }
 }
