@@ -13,7 +13,7 @@ namespace Crystal.Models
         public int HeadClue { get; set; }
         public string SingCode { get; set; }
         public decimal? FreqDiss { get; set; }
-        public decimal? Temper3 { get; set; }
+        public decimal? Temper_3 { get; set; }
         public decimal? TangentD { get; set; }
         public decimal? ErrDiss { get; set; }
         public int? Bknumber { get; set; }

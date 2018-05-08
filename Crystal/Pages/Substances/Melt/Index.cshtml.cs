@@ -6,7 +6,7 @@ using Crystal.Utils;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
-namespace Crystal.Pages.Substances.Heat
+namespace Crystal.Pages.Substances.Melt
 {
     public class IndexModel : PageModel
     {
@@ -19,7 +19,7 @@ namespace Crystal.Pages.Substances.Heat
             _contextUtils = new ContextUtils(_context);
         }
 
-        public IList<HeatTablLanguage> HeatTablLanguage { get; set; }
+        public IList<PlavTablLanguage> PlavTablLanguage { get; set; }
         
         public IDictionary<int, BibliogrLanguage> References { get; set; }
         
@@ -28,21 +28,23 @@ namespace Crystal.Pages.Substances.Heat
         {
             var headClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
 
-            HeatTablLanguage = await _context.HeatTablLanguage
-                .Include(h => h.HeatTabl)
-                .Where(heat => heat.HeatTabl.HeadClue == headClue)
-                .Where(e => e.LanguageId == this.GetLanguageId())
+            PlavTablLanguage = await _context.PlavTablLanguage
+                .Include(m => m.PlavTabl)
+                .Where(m => m.PlavTabl.HeadClue == headClue)
+                .Where(m => m.LanguageId == this.GetLanguageId())
                 .ToListAsync();
 
+            
             var bibliogrLanguage = await _context.BibliogrLanguage
                 .Include(b => b.Bibliogr)
                 .Where(b => b.LanguageId == this.GetLanguageId())
                 .ToDictionaryAsync(b => b.BibliogrId, b => b);
 
-            References = HeatTablLanguage
-                .ToDictionary(h => h.HeatTablId, h =>
-                    h.HeatTabl.Bknumber.HasValue ? bibliogrLanguage[(int) h.HeatTabl.Bknumber] : null
+            References = PlavTablLanguage
+                .ToDictionary(h => h.PlavTablId, h =>
+                    h.PlavTabl.Bknumber.HasValue ? bibliogrLanguage[(int) h.PlavTabl.Bknumber] : null
                 );
+            
         }
     }
 }

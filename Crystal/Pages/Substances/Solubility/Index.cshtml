@@ -18,24 +18,26 @@
     <thead>
     <tr>
         
-            <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.Temperat)
+            <th>                                    
+                @Html.DisplayNameFor(model => model.SuspTablLanguage[0].MethodS)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ZnC)
+                @Html.DisplayNameFor(model => model.SuspTablLanguage[0].SuspName)
+            </th>
+        
+
+        
+            <th>
+                @Html.DisplayNameFor(model => model.SuspTablLanguage[0].SuspTabl.Temper)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.C)
+                @Html.DisplayNameFor(model => model.SuspTablLanguage[0].SuspTabl.Suspense)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ErrC)
-            </th>
-        
-            <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].MethodC)
+                @Html.DisplayNameFor(model => model.SuspTablLanguage[0].SuspTabl.ErrSusp)
             </th>
         
 
@@ -50,37 +52,39 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.HeatTablLanguage)
+    @foreach (var item in Model.SuspTablLanguage)
     {
     <tr>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.Temperat)
+                    @Html.DisplayFor(modelItem => item.MethodS)
                 
             </td>
         
             <td>
                 
-                    @Html.Raw(item.HeatTabl.ZnC)
+                    @Html.DisplayFor(modelItem => item.SuspName)
+                
+            </td>
+        
+
+        
+            <td>
+                
+                    @Html.DisplayFor(modelItem => item.SuspTabl.Temper)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.C)
+                    @Html.DisplayFor(modelItem => item.SuspTabl.Suspense)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.ErrC)
-                
-            </td>
-        
-            <td>
-                
-                    @Html.DisplayFor(modelItem => item.MethodC)
+                    @Html.DisplayFor(modelItem => item.SuspTabl.ErrSusp)
                 
             </td>
         
@@ -90,8 +94,8 @@
             {
             <td>
                 <a data-toggle="popover" data-placement="right"
-                   data-content="@Html.Raw(Model.References[item.HeatTablId])">
-                    @Model.References[item.HeatTablId].BibliogrId
+                   data-content="@Html.Raw(Model.References[item.SuspTablId])">
+                    @Model.References[item.SuspTablId].BibliogrId
                 </a>
             </td>
             }

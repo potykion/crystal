@@ -19,23 +19,33 @@
     <tr>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.Temperat)
+                @Html.DisplayNameFor(model => model.DielectrLanguage[0].MethodY)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ZnC)
+                @Html.DisplayNameFor(model => model.DielectrLanguage[0].Znak)
+            </th>
+        
+
+        
+            <th>
+                @Html.DisplayNameFor(model => model.DielectrLanguage[0].Dielectr.FreqDiel)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.C)
+                @Html.DisplayNameFor(model => model.DielectrLanguage[0].Dielectr.Temper_2)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ErrC)
+                @Html.DisplayNameFor(model => model.DielectrLanguage[0].Dielectr.Constant)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].MethodC)
+                @Html.DisplayNameFor(model => model.DielectrLanguage[0].Dielectr.Diel)
+            </th>
+        
+            <th>
+                @Html.DisplayNameFor(model => model.DielectrLanguage[0].Dielectr.ErrY)
             </th>
         
 
@@ -50,37 +60,51 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.HeatTablLanguage)
+    @foreach (var item in Model.DielectrLanguage)
     {
     <tr>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.Temperat)
+                    @Html.DisplayFor(modelItem => item.MethodY)
                 
             </td>
         
             <td>
                 
-                    @Html.Raw(item.HeatTabl.ZnC)
+                    @Html.DisplayFor(modelItem => item.Znak)
+                
+            </td>
+        
+
+        
+            <td>
+                
+                    @Html.DisplayFor(modelItem => item.Dielectr.FreqDiel)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.C)
+                    @Html.DisplayFor(modelItem => item.Dielectr.Temper_2)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.ErrC)
+                    @Html.DisplayFor(modelItem => item.Dielectr.Constant)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.MethodC)
+                    @Html.DisplayFor(modelItem => item.Dielectr.Diel)
+                
+            </td>
+        
+            <td>
+                
+                    @Html.DisplayFor(modelItem => item.Dielectr.ErrY)
                 
             </td>
         
@@ -90,8 +114,8 @@
             {
             <td>
                 <a data-toggle="popover" data-placement="right"
-                   data-content="@Html.Raw(Model.References[item.HeatTablId])">
-                    @Model.References[item.HeatTablId].BibliogrId
+                   data-content="@Html.Raw(Model.References[item.DielectrId])">
+                    @Model.References[item.DielectrId].BibliogrId
                 </a>
             </td>
             }

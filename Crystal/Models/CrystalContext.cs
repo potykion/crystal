@@ -491,7 +491,7 @@ namespace Crystal.Models
 
             modelBuilder.Entity<DielDissInvariant>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.FreqDiss, e.Temper3, e.TangentD, e.ErrDiss, e.Bknumber })
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.FreqDiss, Temper3 = e.Temper_3, e.TangentD, e.ErrDiss, e.Bknumber })
                     .HasName("U_DielDissInvariant")
                     .IsUnique();
 
@@ -507,7 +507,7 @@ namespace Crystal.Models
 
                 entity.Property(e => e.TangentD).HasColumnType("numeric(9, 7)");
 
-                entity.Property(e => e.Temper3)
+                entity.Property(e => e.Temper_3)
                     .HasColumnName("Temper_3")
                     .HasColumnType("numeric(8, 4)");
 
@@ -558,7 +558,7 @@ namespace Crystal.Models
 
             modelBuilder.Entity<DielectrInvariant>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.FreqDiel, e.Temper2, e.Constant, e.Diel, e.ErrY, e.Bknumber })
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.FreqDiel, Temper2 = e.Temper_2, e.Constant, e.Diel, e.ErrY, e.Bknumber })
                     .HasName("U_DielectrInvariant")
                     .IsUnique();
 
@@ -578,7 +578,7 @@ namespace Crystal.Models
                     .HasMaxLength(2)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Temper2)
+                entity.Property(e => e.Temper_2)
                     .HasColumnName("Temper_2")
                     .HasColumnType("numeric(8, 4)");
 
@@ -1554,7 +1554,7 @@ namespace Crystal.Models
 
             modelBuilder.Entity<ModfTablInvariant>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.SuprTemp, e.Sp2, e.ErrSupr, e.PointGrp, e.Z, e.Bknumber })
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.SuprTemp, Sp2 = e.SP2, e.ErrSupr, e.PointGrp, e.Z, e.Bknumber })
                     .HasName("U_ModfTablInvariant")
                     .IsUnique();
 
@@ -1570,7 +1570,7 @@ namespace Crystal.Models
                     .HasMaxLength(2)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Sp2)
+                entity.Property(e => e.SP2)
                     .HasColumnName("SP2")
                     .HasColumnType("numeric(8, 4)");
 

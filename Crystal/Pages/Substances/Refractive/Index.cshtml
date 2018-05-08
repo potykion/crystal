@@ -19,23 +19,29 @@
     <tr>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.Temperat)
+                @Html.DisplayNameFor(model => model.RefrcIndLanguage[0].MethodIn)
+            </th>
+        
+
+        
+            <th>
+                @Html.DisplayNameFor(model => model.RefrcIndLanguage[0].RefrcInd.Temper)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ZnC)
+                @Html.DisplayNameFor(model => model.RefrcIndLanguage[0].RefrcInd.WaveLeng)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.C)
+                @Html.DisplayNameFor(model => model.RefrcIndLanguage[0].RefrcInd.NazbIndx)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ErrC)
+                @Html.DisplayNameFor(model => model.RefrcIndLanguage[0].RefrcInd.ZnachInd)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].MethodC)
+                @Html.DisplayNameFor(model => model.RefrcIndLanguage[0].RefrcInd.ErrIndex)
             </th>
         
 
@@ -50,37 +56,45 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.HeatTablLanguage)
+    @foreach (var item in Model.RefrcIndLanguage)
     {
     <tr>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.Temperat)
+                    @Html.DisplayFor(modelItem => item.MethodIn)
+                
+            </td>
+        
+
+        
+            <td>
+                
+                    @Html.DisplayFor(modelItem => item.RefrcInd.Temper)
                 
             </td>
         
             <td>
                 
-                    @Html.Raw(item.HeatTabl.ZnC)
+                    @Html.DisplayFor(modelItem => item.RefrcInd.WaveLeng)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.C)
+                    @Html.DisplayFor(modelItem => item.RefrcInd.NazbIndx)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.ErrC)
+                    @Html.DisplayFor(modelItem => item.RefrcInd.ZnachInd)
                 
             </td>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.MethodC)
+                    @Html.DisplayFor(modelItem => item.RefrcInd.ErrIndex)
                 
             </td>
         
@@ -90,8 +104,8 @@
             {
             <td>
                 <a data-toggle="popover" data-placement="right"
-                   data-content="@Html.Raw(Model.References[item.HeatTablId])">
-                    @Model.References[item.HeatTablId].BibliogrId
+                   data-content="@Html.Raw(Model.References[item.RefrcIndId])">
+                    @Model.References[item.RefrcIndId].BibliogrId
                 </a>
             </td>
             }

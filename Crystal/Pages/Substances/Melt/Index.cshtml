@@ -19,23 +19,17 @@
     <tr>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.Temperat)
+                @Html.DisplayNameFor(model => model.PlavTablLanguage[0].PlavType)
+            </th>
+        
+
+        
+            <th>
+                @Html.DisplayNameFor(model => model.PlavTablLanguage[0].PlavTabl.PlavTemp)
             </th>
         
             <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ZnC)
-            </th>
-        
-            <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.C)
-            </th>
-        
-            <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ErrC)
-            </th>
-        
-            <th>
-                @Html.DisplayNameFor(model => model.HeatTablLanguage[0].MethodC)
+                @Html.DisplayNameFor(model => model.PlavTablLanguage[0].PlavTabl.ErrPlav)
             </th>
         
 
@@ -50,37 +44,27 @@
     </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.HeatTablLanguage)
+    @foreach (var item in Model.PlavTablLanguage)
     {
     <tr>
         
             <td>
                 
-                    @Html.DisplayFor(modelItem => item.HeatTabl.Temperat)
+                    @Html.DisplayFor(modelItem => item.PlavType)
+                
+            </td>
+        
+
+        
+            <td>
+                
+                    @Html.DisplayFor(modelItem => item.PlavTabl.PlavTemp)
                 
             </td>
         
             <td>
                 
-                    @Html.Raw(item.HeatTabl.ZnC)
-                
-            </td>
-        
-            <td>
-                
-                    @Html.DisplayFor(modelItem => item.HeatTabl.C)
-                
-            </td>
-        
-            <td>
-                
-                    @Html.DisplayFor(modelItem => item.HeatTabl.ErrC)
-                
-            </td>
-        
-            <td>
-                
-                    @Html.DisplayFor(modelItem => item.MethodC)
+                    @Html.DisplayFor(modelItem => item.PlavTabl.ErrPlav)
                 
             </td>
         
@@ -90,8 +74,8 @@
             {
             <td>
                 <a data-toggle="popover" data-placement="right"
-                   data-content="@Html.Raw(Model.References[item.HeatTablId])">
-                    @Model.References[item.HeatTablId].BibliogrId
+                   data-content="@Html.Raw(Model.References[item.PlavTablId])">
+                    @Model.References[item.PlavTablId].BibliogrId
                 </a>
             </td>
             }

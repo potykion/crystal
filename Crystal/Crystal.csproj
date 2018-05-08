@@ -20,4 +20,21 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.0-preview1-final" />
   </ItemGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Substances\Acousto-optical\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\AcoustoOptical\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Lattice\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Piezoelectric_Coupling\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\ElectroOptical\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Elastic\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\NonlinearOptical\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Melt\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Wave\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Dielectric_Loss\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Refractive\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Hardness\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Sellmeier\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\ElastoOptical\Index.cshtml" />
+    <_ContentIncludedByDefault Remove="Pages\Substances\Piezoelectric\Index.cshtml" />
+  </ItemGroup>
 </Project>
