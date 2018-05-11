@@ -1,6 +1,5 @@
-@page
-@using Substances.Density
-@model Substances.Density.CreateModel
+@page "{systemUrl}"
+@model CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -8,50 +7,52 @@
 
 <h2>Create</h2>
 
-<h4>DensTablLanguage</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DensTablLanguage.HeadClue" class="control-label"></label>
-                <select asp-for="DensTablLanguage.HeadClue" class ="form-control" asp-items="ViewBag.HeadClue"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DensTablLanguage.SingCode" class="control-label"></label>
-                <select asp-for="DensTablLanguage.SingCode" class ="form-control" asp-items="ViewBag.SingCode"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="DensTablLanguage.Density" class="control-label"></label>
-                <input asp-for="DensTablLanguage.Density" class="form-control" />
-                <span asp-validation-for="DensTablLanguage.Density" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DensTablLanguage.ErrDens" class="control-label"></label>
-                <input asp-for="DensTablLanguage.ErrDens" class="form-control" />
-                <span asp-validation-for="DensTablLanguage.ErrDens" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="DensTablLanguage.MethodD" class="control-label"></label>
-                <input asp-for="DensTablLanguage.MethodD" class="form-control" />
+                <input asp-for="DensTablLanguage.MethodD" class="form-control"/>
                 <span asp-validation-for="DensTablLanguage.MethodD" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="DensTablLanguage.Bknumber" class="control-label"></label>
-                <select asp-for="DensTablLanguage.Bknumber" class ="form-control" asp-items="ViewBag.Bknumber"></select>
+                <label asp-for="DensTablLanguage.DensTabl.Density" class="control-label"></label>
+                <input asp-for="DensTablLanguage.DensTabl.Density" class="form-control"/>
+                <span asp-validation-for="DensTablLanguage.DensTabl.Density" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="DensTablLanguage.DensTabl.ErrDens" class="control-label"></label>
+                <input asp-for="DensTablLanguage.DensTabl.ErrDens" class="form-control"/>
+                <span asp-validation-for="DensTablLanguage.DensTabl.ErrDens" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DensTablLanguage.DensTabl.SingCode" class="control-label"></label>
+                <select asp-for="DensTablLanguage.DensTabl.SingCode" class="form-control" asp-items="ViewBag.SingCode"></select>
+                <span asp-validation-for="DensTablLanguage.DensTabl.SingCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="DensTablLanguage.DensTabl.Bknumber" class="control-label"></label>
+                <input asp-for="DensTablLanguage.DensTabl.Bknumber" class="form-control" />
+                <span asp-validation-for="DensTablLanguage.DensTabl.Bknumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a onclick="window.history.back();">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

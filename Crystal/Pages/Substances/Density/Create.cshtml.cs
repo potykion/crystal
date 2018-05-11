@@ -1,42 +1,58 @@
 using System.Threading.Tasks;
+using System.Linq;
 using Crystal.Models;
+using Crystal.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crystal.Pages.Substances.Density
 {
+    [Authorize(Policy = "AdminOnly")]
     public class CreateModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
+        private readonly ContextUtils _contextUtils;
+        private readonly UrlBuilder _urlBuilder = new UrlBuilder();
 
-        public CreateModel(Crystal.Models.CrystalContext context)
+        public CreateModel(CrystalContext context)
         {
             _context = context;
+            _contextUtils = new ContextUtils(context);
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-        ViewData["HeadClue"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
-        ViewData["HeadClue"] = new SelectList(_context.SingTabl, "HeadClue", "SingType");
+            var singCodes = await _context.SingTabl.Select(s => s.SingType).Distinct().ToListAsync();
+            ViewData["SingCode"] = new SelectList(singCodes);
+
             return Page();
         }
 
-        [BindProperty]
-        public DensTablLanguage DensTablLanguage { get; set; }
+        [BindProperty] public DensTablLanguage DensTablLanguage { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string systemUrl)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            DensTablLanguage.DensTabl.HeadClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
+            DensTablLanguage.LanguageId = this.GetLanguageId();
+
             _context.DensTablLanguage.Add(DensTablLanguage);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            var url = _urlBuilder.BuildPropertyLink(
+                this.GetLanguage(),
+                "Density",
+                system: systemUrl
+            );
+            return Redirect(url);
+
         }
     }
 }

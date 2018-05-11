@@ -1,5 +1,14 @@
-@page
-@model Crystal.Pages.Substances.Thermal_Expansion.IndexModel
+@page "{systemUrl}"
+
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Utils
+
+@model IndexModel
+
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer;
+@inject IAuthorizationService AuthorizationService
+@inject UrlBuilder UrlBuilder
 
 @{
     ViewData["Title"] = "Index";
@@ -7,90 +16,124 @@
 
 <h2>Index</h2>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+<div>
+    <a href="@UrlBuilder.BuildPropertyLink(
+                     Model.GetLanguage(),
+                     "Thermal_Expansion",
+                     "Create",
+                     ViewContext.RouteData.Values["systemUrl"] as string)">
+        Create New
+    </a>
+
+     <div style="float: right">
+        Сингония:
+        @foreach (var sing in Model.SingTabl)
+        {
+            <a href="@UrlBuilder.BuildPropertyLink(
+                         Model.GetLanguage(),
+                         "Thermal_Expansion",
+                         system: ViewContext.RouteData.Values["systemUrl"] as string,
+                         queryParams: $"sing={sing.SingType}")">
+                @sing.SingType
+            </a>
+        }
+    </div>
+</div>
 <table class="table">
     <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].DataType)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].Temper1)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].Temper2)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].Znak1)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].S11)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].ErrHexp)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].MethodEx)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].MethodEx1)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].LanguageId)
-                </th>
+    <tr>
             <th>
-                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].BknumberNavigation)
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].MethodEx)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].SingTabl)
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].Znak1)
             </th>
-            <th></th>
-        </tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].HeatExpn.DataType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].HeatExpn.Temper_1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].HeatExpn.Temper_2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].HeatExpn.S11)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HeatExpnLanguage[0].HeatExpn.ErrHExp)
+            </th>
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+            {
+            <th>
+                @SharedLocalizer["Reference"]
+            </th>
+            }
+
+         <th>Actions</th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.HeatExpnLanguage) {
-        <tr>
+    @foreach (var item in Model.HeatExpnLanguage)
+    {
+    <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.DataType)
+                    @Html.DisplayFor(modelItem => item.MethodEx)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Temper1)
+                    @Html.DisplayFor(modelItem => item.Znak1)
+            </td>
+
+            <td>
+                    @Html.DisplayFor(modelItem => item.HeatExpn.DataType)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Temper2)
+                    @Html.DisplayFor(modelItem => item.HeatExpn.Temper_1)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Znak1)
+                    @Html.DisplayFor(modelItem => item.HeatExpn.Temper_2)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.S11)
+                    @Html.DisplayFor(modelItem => item.HeatExpn.S11)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ErrHexp)
+                    @Html.DisplayFor(modelItem => item.HeatExpn.ErrHExp)
             </td>
+
+            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+            {
             <td>
-                @Html.DisplayFor(modelItem => item.MethodEx)
+                <a data-toggle="popover" data-placement="right"
+                   data-content="@Html.Raw(Model.References[item.HeatExpnId])">
+                    @Model.References[item.HeatExpnId].BibliogrId
+                </a>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MethodEx1)
+            }
+
+         <td>
+                <div>
+                    <a href="@UrlBuilder.BuildPropertyLink(
+                                 Model.GetLanguage(),
+                                 "Thermal_Expansion",
+                                 "Edit",
+                                 queryParams: $"id={item.Id}"
+                                 )">
+                        Edit
+                    </a>
+                    |
+                    <a href="@UrlBuilder.BuildPropertyLink(
+                                 Model.GetLanguage(),
+                                 "Thermal_Expansion",
+                                 "Delete",
+                                 queryParams: $"id={item.Id}"
+                                 )">
+                        Delete
+                    </a>
+                </div>
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LanguageId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BknumberNavigation.Bknumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SingTabl.SingType)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+    </tr>
+    }
     </tbody>
 </table>

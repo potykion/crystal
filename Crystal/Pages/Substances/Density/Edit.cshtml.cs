@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,72 +9,54 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Crystal.Pages.Substances.Density
 {
+    [Authorize(Policy = "AdminOnly")]
     public class EditModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
 
-        public EditModel(Crystal.Models.CrystalContext context)
+        public EditModel(CrystalContext context)
         {
             _context = context;
         }
 
         [BindProperty] public DensTablLanguage DensTablLanguage { get; set; }
+        [BindProperty] public DensTablInvariant DensTablInvariant { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             DensTablLanguage = await _context.DensTablLanguage
-                .Include(d => d.DensTabl)
-                .Include(d => d.DensTabl.BknumberNavigation)
-                .Include(d => d.DensTabl.HeadClueNavigation)
-                .Include(d => d.DensTabl.SingTabl).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(h => h.DensTabl)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (DensTablLanguage == null)
-            {
-                return NotFound();
-            }
+            DensTablInvariant = DensTablLanguage.DensTabl;
 
-            ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-            ViewData["HeadClue"] = new SelectList(_context.HeadTablInvariant, "HeadClue", "Help");
-            ViewData["HeadClue"] = new SelectList(_context.SingTabl, "HeadClue", "SingType");
+            var singCodes = await _context.SingTabl.Select(s => s.SingType).Distinct().ToListAsync();
+            ViewData["SingCode"] = new SelectList(singCodes);
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            var DensTablLanguageToUpdate = await _context.DensTablLanguage
+                .Include(m => m.DensTabl)
+                .FirstAsync(m => m.Id == id);
 
-            _context.Attach(DensTablLanguage).State = EntityState.Modified;
+            var DensTablInvariantToUpdate = DensTablLanguageToUpdate.DensTabl;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DensTablLanguageExists(DensTablLanguage.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await TryUpdateModelAsync(
+                DensTablLanguageToUpdate,
+                "DensTablLanguage",
+                    m => m.MethodD            );
 
-            return RedirectToPage("./Index");
-        }
+            await TryUpdateModelAsync(
+                DensTablInvariantToUpdate,
+                "DensTablInvariant",
+m => m.Density ,m => m.ErrDens , m => m.Bknumber , m => m.SingCode             );
 
-        private bool DensTablLanguageExists(int id)
-        {
-            return _context.DensTablLanguage.Any(e => e.Id == id);
+            await _context.SaveChangesAsync();
+
+            return Page();
         }
     }
 }

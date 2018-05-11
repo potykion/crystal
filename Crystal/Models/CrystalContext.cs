@@ -1232,7 +1232,7 @@ namespace Crystal.Models
 
             modelBuilder.Entity<HeatExpnInvariant>(entity =>
             {
-                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.DataType, e.Temper1, e.Temper2, e.S11, e.ErrHexp, e.Bknumber })
+                entity.HasIndex(e => new { e.HeadClue, e.SingCode, e.DataType, Temper1 = e.Temper_1, Temper2 = e.Temper_2, e.S11, ErrHexp = e.ErrHExp, e.Bknumber })
                     .HasName("U_HeatExpnInvariant")
                     .IsUnique();
 
@@ -1240,7 +1240,7 @@ namespace Crystal.Models
 
                 entity.Property(e => e.DataType).HasDefaultValueSql("(0)");
 
-                entity.Property(e => e.ErrHexp)
+                entity.Property(e => e.ErrHExp)
                     .HasColumnName("ErrHExp")
                     .HasColumnType("numeric(9, 7)");
 
@@ -1250,11 +1250,11 @@ namespace Crystal.Models
                     .HasMaxLength(2)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Temper1)
+                entity.Property(e => e.Temper_1)
                     .HasColumnName("Temper_1")
                     .HasColumnType("numeric(8, 4)");
 
-                entity.Property(e => e.Temper2)
+                entity.Property(e => e.Temper_2)
                     .HasColumnName("Temper_2")
                     .HasColumnType("numeric(8, 4)");
 

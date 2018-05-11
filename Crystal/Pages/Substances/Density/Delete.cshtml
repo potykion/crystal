@@ -1,6 +1,5 @@
 @page
-@using Substances.Density
-@model Substances.Density.DeleteModel
+@model DeleteModel
 
 @{
     ViewData["Title"] = "Delete";
@@ -10,62 +9,39 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>DensTablLanguage</h4>
+    <h4>Density</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.DensTablLanguage.Density)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DensTablLanguage.Density)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DensTablLanguage.ErrDens)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DensTablLanguage.ErrDens)
-        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.DensTablLanguage.MethodD)
         </dt>
         <dd>
             @Html.DisplayFor(model => model.DensTablLanguage.MethodD)
         </dd>
+
         <dt>
-            @Html.DisplayNameFor(model => model.DensTablLanguage.MethodD1)
+            @Html.DisplayNameFor(model => model.DensTablInvariant.Density)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DensTablLanguage.MethodD1)
+            @Html.DisplayFor(model => model.DensTablInvariant.Density)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.DensTablLanguage.LanguageId)
+            @Html.DisplayNameFor(model => model.DensTablInvariant.ErrDens)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.DensTablLanguage.LanguageId)
+            @Html.DisplayFor(model => model.DensTablInvariant.ErrDens)
         </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DensTablLanguage.BknumberNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DensTablLanguage.BknumberNavigation.Bknumber)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DensTablLanguage.HeadClueNavigation)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DensTablLanguage.HeadClueNavigation.Help)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DensTablLanguage.SingTabl)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DensTablLanguage.SingTabl.SingType)
-        </dd>
+
     </dl>
-    
+
     <form method="post">
         <input type="hidden" asp-for="DensTablLanguage.Id" />
         <input type="submit" value="Delete" class="btn btn-default" /> |
         <a asp-page="./Index">Back to List</a>
     </form>
+</div>
+
+<div>
+    <a onclick="window.history.back();">Back to List</a>
 </div>

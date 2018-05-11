@@ -1,40 +1,56 @@
 using System.Threading.Tasks;
+using System.Linq;
 using Crystal.Models;
+using Crystal.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crystal.Pages.Substances.Heat
 {
+    [Authorize(Policy = "AdminOnly")]
     public class CreateModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
+        private readonly ContextUtils _contextUtils;
+        private readonly UrlBuilder _urlBuilder = new UrlBuilder();
 
-        public CreateModel(Crystal.Models.CrystalContext context)
+        public CreateModel(CrystalContext context)
         {
             _context = context;
+            _contextUtils = new ContextUtils(context);
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["HeatTablId"] = new SelectList(_context.HeatTablInvariant, "Id", "Id");
+
             return Page();
         }
 
-        [BindProperty]
-        public HeatTablLanguage HeatTablLanguage { get; set; }
+        [BindProperty] public HeatTablLanguage HeatTablLanguage { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string systemUrl)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            HeatTablLanguage.HeatTabl.HeadClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
+            HeatTablLanguage.LanguageId = this.GetLanguageId();
+
             _context.HeatTablLanguage.Add(HeatTablLanguage);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            var url = _urlBuilder.BuildPropertyLink(
+                this.GetLanguage(),
+                "Heat",
+                system: systemUrl
+            );
+            return Redirect(url);
+
         }
     }
 }

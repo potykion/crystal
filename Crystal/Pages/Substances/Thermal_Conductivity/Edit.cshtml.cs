@@ -1,80 +1,62 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Crystal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
 namespace Crystal.Pages.Substances.Thermal_Conductivity
 {
+    [Authorize(Policy = "AdminOnly")]
     public class EditModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
 
-        public EditModel(Crystal.Models.CrystalContext context)
+        public EditModel(CrystalContext context)
         {
             _context = context;
         }
 
         [BindProperty] public HeatExpnLanguage HeatExpnLanguage { get; set; }
+        [BindProperty] public HeatExpnInvariant HeatExpnInvariant { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             HeatExpnLanguage = await _context.HeatExpnLanguage
                 .Include(h => h.HeatExpn)
-                .Include(h => h.HeatExpn.BknumberNavigation)
-                .Include(h => h.HeatExpn.SingTabl)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (HeatExpnLanguage == null)
-            {
-                return NotFound();
-            }
+            HeatExpnInvariant = HeatExpnLanguage.HeatExpn;
 
-            ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-            ViewData["HeadClue"] = new SelectList(_context.SingTabl, "HeadClue", "SingType");
+            var singCodes = await _context.SingTabl.Select(s => s.SingType).Distinct().ToListAsync();
+            ViewData["SingCode"] = new SelectList(singCodes);
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            var HeatExpnLanguageToUpdate = await _context.HeatExpnLanguage
+                .Include(m => m.HeatExpn)
+                .FirstAsync(m => m.Id == id);
 
-            _context.Attach(HeatExpnLanguage).State = EntityState.Modified;
+            var HeatExpnInvariantToUpdate = HeatExpnLanguageToUpdate.HeatExpn;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HeatExpnLanguageExists(HeatExpnLanguage.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await TryUpdateModelAsync(
+                HeatExpnLanguageToUpdate,
+                "HeatExpnLanguage",
+                    m => m.MethodEx,                    m => m.Znak1            );
 
-            return RedirectToPage("./Index");
-        }
+            await TryUpdateModelAsync(
+                HeatExpnInvariantToUpdate,
+                "HeatExpnInvariant",
+m => m.DataType ,m => m.Temper_1 ,m => m.Temper_2 ,m => m.S11 ,m => m.ErrHExp , m => m.Bknumber , m => m.SingCode             );
 
-        private bool HeatExpnLanguageExists(int id)
-        {
-            return _context.HeatExpnLanguage.Any(e => e.Id == id);
+            await _context.SaveChangesAsync();
+
+            return Page();
         }
     }
 }

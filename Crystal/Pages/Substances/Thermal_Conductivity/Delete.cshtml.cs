@@ -1,62 +1,60 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using Crystal.Models;
+using Crystal.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Crystal.Models;
 
 namespace Crystal.Pages.Substances.Thermal_Conductivity
 {
+    [Authorize(Policy = "AdminOnly")]
     public class DeleteModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
+        private readonly UrlBuilder _urlBuilder = new UrlBuilder();
+        private readonly ContextUtils _contextUtils;
 
-        public DeleteModel(Crystal.Models.CrystalContext context)
+        public DeleteModel(CrystalContext context)
         {
             _context = context;
+            _contextUtils = new ContextUtils(context);
         }
 
         [BindProperty] public HeatExpnLanguage HeatExpnLanguage { get; set; }
+        [BindProperty] public HeatExpnInvariant HeatExpnInvariant { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             HeatExpnLanguage = await _context.HeatExpnLanguage
                 .Include(h => h.HeatExpn)
-                .Include(h => h.HeatExpn.BknumberNavigation)
-                .Include(h => h.HeatExpn.SingTabl)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstAsync(m => m.Id == id);
 
-            if (HeatExpnLanguage == null)
-            {
-                return NotFound();
-            }
+            HeatExpnInvariant = HeatExpnLanguage.HeatExpn;
 
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            HeatExpnLanguage = await _context.HeatExpnLanguage
+                .Include(h => h.HeatExpn)
+                .FirstAsync(m => m.Id == id);
 
-            HeatExpnLanguage = await _context.HeatExpnLanguage.FindAsync(id);
+            HeatExpnInvariant = HeatExpnLanguage.HeatExpn;
 
-            if (HeatExpnLanguage != null)
-            {
-                _context.HeatExpnLanguage.Remove(HeatExpnLanguage);
-                await _context.SaveChangesAsync();
-            }
+            _context.HeatExpnLanguage.Remove(HeatExpnLanguage);
+            _context.HeatExpnInvariant.Remove(HeatExpnInvariant);
 
-            return RedirectToPage("./Index");
+            await _context.SaveChangesAsync();
+
+            var url = _urlBuilder.BuildPropertyLink(
+                this.GetLanguage(),
+                "Thermal_Conductivity",
+                system: _contextUtils.GetSystemUrlByHeadClue(HeatExpnInvariant.HeadClue)
+            );
+            return Redirect(url);
+
         }
     }
 }

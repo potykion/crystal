@@ -20,19 +20,21 @@ namespace Crystal.Pages.Substances.Heat
         }
 
         public IList<HeatTablLanguage> HeatTablLanguage { get; set; }
-        
         public IDictionary<int, BibliogrLanguage> References { get; set; }
-        
 
-        public async Task OnGetAsync(string systemUrl)
+        public async Task OnGetAsync(string systemUrl )
         {
             var headClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
 
-            HeatTablLanguage = await _context.HeatTablLanguage
-                .Include(h => h.HeatTabl)
-                .Where(heat => heat.HeatTabl.HeadClue == headClue)
-                .Where(e => e.LanguageId == this.GetLanguageId())
-                .ToListAsync();
+            var substanceHeatTabl = _context.HeatTablLanguage
+                .Include(m => m.HeatTabl)
+                .Where(m => m.HeatTabl.HeadClue == headClue)
+                .Where(m => m.LanguageId == this.GetLanguageId());
+
+
+
+            HeatTablLanguage = await substanceHeatTabl.ToListAsync();
+
 
             var bibliogrLanguage = await _context.BibliogrLanguage
                 .Include(b => b.Bibliogr)

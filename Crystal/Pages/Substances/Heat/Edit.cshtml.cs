@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -8,67 +9,52 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Crystal.Pages.Substances.Heat
 {
+    [Authorize(Policy = "AdminOnly")]
     public class EditModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
 
-        public EditModel(Crystal.Models.CrystalContext context)
+        public EditModel(CrystalContext context)
         {
             _context = context;
         }
 
-        [BindProperty]
-        public HeatTablLanguage HeatTablLanguage { get; set; }
+        [BindProperty] public HeatTablLanguage HeatTablLanguage { get; set; }
+        [BindProperty] public HeatTablInvariant HeatTablInvariant { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             HeatTablLanguage = await _context.HeatTablLanguage
-                .Include(h => h.HeatTabl).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(h => h.HeatTabl)
+                .FirstOrDefaultAsync(m => m.Id == id);
 
-            if (HeatTablLanguage == null)
-            {
-                return NotFound();
-            }
-           ViewData["HeatTablId"] = new SelectList(_context.HeatTablInvariant, "Id", "Id");
+            HeatTablInvariant = HeatTablLanguage.HeatTabl;
+
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
+            var HeatTablLanguageToUpdate = await _context.HeatTablLanguage
+                .Include(m => m.HeatTabl)
+                .FirstAsync(m => m.Id == id);
 
-            _context.Attach(HeatTablLanguage).State = EntityState.Modified;
+            var HeatTablInvariantToUpdate = HeatTablLanguageToUpdate.HeatTabl;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!HeatTablLanguageExists(HeatTablLanguage.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await TryUpdateModelAsync(
+                HeatTablLanguageToUpdate,
+                "HeatTablLanguage",
+                    m => m.MethodC            );
 
-            return RedirectToPage("./Index");
-        }
+            await TryUpdateModelAsync(
+                HeatTablInvariantToUpdate,
+                "HeatTablInvariant",
+m => m.Temperat ,m => m.ZnC ,m => m.C ,m => m.ErrC , m => m.Bknumber             );
 
-        private bool HeatTablLanguageExists(int id)
-        {
-            return _context.HeatTablLanguage.Any(e => e.Id == id);
+            await _context.SaveChangesAsync();
+
+            return Page();
         }
     }
 }

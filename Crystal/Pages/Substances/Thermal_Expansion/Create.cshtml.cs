@@ -1,44 +1,58 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
+using System.Linq;
+using Crystal.Models;
+using Crystal.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Crystal.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Crystal.Pages.Substances.Thermal_Expansion
 {
+    [Authorize(Policy = "AdminOnly")]
     public class CreateModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
+        private readonly ContextUtils _contextUtils;
+        private readonly UrlBuilder _urlBuilder = new UrlBuilder();
 
-        public CreateModel(Crystal.Models.CrystalContext context)
+        public CreateModel(CrystalContext context)
         {
             _context = context;
+            _contextUtils = new ContextUtils(context);
         }
 
-        public IActionResult OnGet()
+        public async Task<IActionResult> OnGetAsync()
         {
-        ViewData["Bknumber"] = new SelectList(_context.BibliogrInvariant, "Bknumber", "Bknumber");
-        ViewData["HeadClue"] = new SelectList(_context.SingTabl, "HeadClue", "SingType");
+            var singCodes = await _context.SingTabl.Select(s => s.SingType).Distinct().ToListAsync();
+            ViewData["SingCode"] = new SelectList(singCodes);
+
             return Page();
         }
 
-        [BindProperty]
-        public HeatExpnLanguage HeatExpnLanguage { get; set; }
+        [BindProperty] public HeatExpnLanguage HeatExpnLanguage { get; set; }
 
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(string systemUrl)
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
 
+            HeatExpnLanguage.HeatExpn.HeadClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
+            HeatExpnLanguage.LanguageId = this.GetLanguageId();
+
             _context.HeatExpnLanguage.Add(HeatExpnLanguage);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            var url = _urlBuilder.BuildPropertyLink(
+                this.GetLanguage(),
+                "Thermal_Expansion",
+                system: systemUrl
+            );
+            return Redirect(url);
+
         }
     }
 }

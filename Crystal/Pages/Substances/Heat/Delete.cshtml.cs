@@ -1,56 +1,60 @@
 using System.Threading.Tasks;
 using Crystal.Models;
+using Crystal.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Crystal.Pages.Substances.Heat
 {
+    [Authorize(Policy = "AdminOnly")]
     public class DeleteModel : PageModel
     {
-        private readonly Crystal.Models.CrystalContext _context;
+        private readonly CrystalContext _context;
+        private readonly UrlBuilder _urlBuilder = new UrlBuilder();
+        private readonly ContextUtils _contextUtils;
 
-        public DeleteModel(Crystal.Models.CrystalContext context)
+        public DeleteModel(CrystalContext context)
         {
             _context = context;
+            _contextUtils = new ContextUtils(context);
         }
 
-        [BindProperty]
-        public HeatTablLanguage HeatTablLanguage { get; set; }
+        [BindProperty] public HeatTablLanguage HeatTablLanguage { get; set; }
+        [BindProperty] public HeatTablInvariant HeatTablInvariant { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             HeatTablLanguage = await _context.HeatTablLanguage
-                .Include(h => h.HeatTabl).FirstOrDefaultAsync(m => m.Id == id);
+                .Include(h => h.HeatTabl)
+                .FirstAsync(m => m.Id == id);
 
-            if (HeatTablLanguage == null)
-            {
-                return NotFound();
-            }
+            HeatTablInvariant = HeatTablLanguage.HeatTabl;
+
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public async Task<IActionResult> OnPostAsync(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            HeatTablLanguage = await _context.HeatTablLanguage
+                .Include(h => h.HeatTabl)
+                .FirstAsync(m => m.Id == id);
 
-            HeatTablLanguage = await _context.HeatTablLanguage.FindAsync(id);
+            HeatTablInvariant = HeatTablLanguage.HeatTabl;
 
-            if (HeatTablLanguage != null)
-            {
-                _context.HeatTablLanguage.Remove(HeatTablLanguage);
-                await _context.SaveChangesAsync();
-            }
+            _context.HeatTablLanguage.Remove(HeatTablLanguage);
+            _context.HeatTablInvariant.Remove(HeatTablInvariant);
 
-            return RedirectToPage("./Index");
+            await _context.SaveChangesAsync();
+
+            var url = _urlBuilder.BuildPropertyLink(
+                this.GetLanguage(),
+                "Heat",
+                system: _contextUtils.GetSystemUrlByHeadClue(HeatTablInvariant.HeadClue)
+            );
+            return Redirect(url);
+
         }
     }
 }

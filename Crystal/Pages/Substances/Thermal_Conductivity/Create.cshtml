@@ -1,5 +1,5 @@
-@page
-@model Crystal.Pages.Substances.Thermal_Conductivity.CreateModel
+@page "{systemUrl}"
+@model CreateModel
 
 @{
     ViewData["Title"] = "Create";
@@ -7,70 +7,72 @@
 
 <h2>Create</h2>
 
-<h4>HeatExpnLanguage</h4>
-<hr />
+<hr/>
 <div class="row">
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="HeatExpnLanguage.HeadClue" class="control-label"></label>
-                <select asp-for="HeatExpnLanguage.HeadClue" class ="form-control" asp-items="ViewBag.HeadClue"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatExpnLanguage.SingCode" class="control-label"></label>
-                <select asp-for="HeatExpnLanguage.SingCode" class ="form-control" asp-items="ViewBag.SingCode"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatExpnLanguage.Temper1" class="control-label"></label>
-                <input asp-for="HeatExpnLanguage.Temper1" class="form-control" />
-                <span asp-validation-for="HeatExpnLanguage.Temper1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatExpnLanguage.Temper2" class="control-label"></label>
-                <input asp-for="HeatExpnLanguage.Temper2" class="form-control" />
-                <span asp-validation-for="HeatExpnLanguage.Temper2" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatExpnLanguage.Znak1" class="control-label"></label>
-                <input asp-for="HeatExpnLanguage.Znak1" class="form-control" />
-                <span asp-validation-for="HeatExpnLanguage.Znak1" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatExpnLanguage.S11" class="control-label"></label>
-                <input asp-for="HeatExpnLanguage.S11" class="form-control" />
-                <span asp-validation-for="HeatExpnLanguage.S11" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HeatExpnLanguage.ErrHexp" class="control-label"></label>
-                <input asp-for="HeatExpnLanguage.ErrHexp" class="form-control" />
-                <span asp-validation-for="HeatExpnLanguage.ErrHexp" class="text-danger"></span>
-            </div>
+
             <div class="form-group">
                 <label asp-for="HeatExpnLanguage.MethodEx" class="control-label"></label>
-                <input asp-for="HeatExpnLanguage.MethodEx" class="form-control" />
+                <input asp-for="HeatExpnLanguage.MethodEx" class="form-control"/>
                 <span asp-validation-for="HeatExpnLanguage.MethodEx" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HeatExpnLanguage.Bknumber" class="control-label"></label>
-                <select asp-for="HeatExpnLanguage.Bknumber" class ="form-control" asp-items="ViewBag.Bknumber"></select>
+                <label asp-for="HeatExpnLanguage.Znak1" class="control-label"></label>
+                <input asp-for="HeatExpnLanguage.Znak1" class="form-control"/>
+                <span asp-validation-for="HeatExpnLanguage.Znak1" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HeatExpnLanguage.HeatExpn.DataType" class="control-label"></label>
+                <input asp-for="HeatExpnLanguage.HeatExpn.DataType" class="form-control"/>
+                <span asp-validation-for="HeatExpnLanguage.HeatExpn.DataType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="HeatExpnLanguage.LanguageId" class="control-label"></label>
-                <input asp-for="HeatExpnLanguage.LanguageId" class="form-control" />
-                <span asp-validation-for="HeatExpnLanguage.LanguageId" class="text-danger"></span>
+                <label asp-for="HeatExpnLanguage.HeatExpn.Temper_1" class="control-label"></label>
+                <input asp-for="HeatExpnLanguage.HeatExpn.Temper_1" class="form-control"/>
+                <span asp-validation-for="HeatExpnLanguage.HeatExpn.Temper_1" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <label asp-for="HeatExpnLanguage.HeatExpn.Temper_2" class="control-label"></label>
+                <input asp-for="HeatExpnLanguage.HeatExpn.Temper_2" class="form-control"/>
+                <span asp-validation-for="HeatExpnLanguage.HeatExpn.Temper_2" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeatExpnLanguage.HeatExpn.S11" class="control-label"></label>
+                <input asp-for="HeatExpnLanguage.HeatExpn.S11" class="form-control"/>
+                <span asp-validation-for="HeatExpnLanguage.HeatExpn.S11" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HeatExpnLanguage.HeatExpn.ErrHExp" class="control-label"></label>
+                <input asp-for="HeatExpnLanguage.HeatExpn.ErrHExp" class="form-control"/>
+                <span asp-validation-for="HeatExpnLanguage.HeatExpn.ErrHExp" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HeatExpnLanguage.HeatExpn.SingCode" class="control-label"></label>
+                <select asp-for="HeatExpnLanguage.HeatExpn.SingCode" class="form-control" asp-items="ViewBag.SingCode"></select>
+                <span asp-validation-for="HeatExpnLanguage.HeatExpn.SingCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HeatExpnLanguage.HeatExpn.Bknumber" class="control-label"></label>
+                <input asp-for="HeatExpnLanguage.HeatExpn.Bknumber" class="form-control" />
+                <span asp-validation-for="HeatExpnLanguage.HeatExpn.Bknumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default"/>
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-page="Index">Back to List</a>
+    <a onclick="window.history.back();">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
 }

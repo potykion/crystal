@@ -13,10 +13,10 @@ namespace Crystal.Models
         public int HeadClue { get; set; }
         public string SingCode { get; set; }
         public int DataType { get; set; }
-        public decimal? Temper1 { get; set; }
-        public decimal? Temper2 { get; set; }
+        public decimal? Temper_1 { get; set; }
+        public decimal? Temper_2 { get; set; }
         public decimal? S11 { get; set; }
-        public decimal? ErrHexp { get; set; }
+        public decimal? ErrHExp { get; set; }
         public int? Bknumber { get; set; }
         public int Id { get; set; }
 
