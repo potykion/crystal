@@ -42,40 +42,40 @@
 <table class="table">
     <thead>
     <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.DecrTablLanguage[0].Nzv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DecrTablLanguage[0].Uzv)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DecrTablLanguage[0].WaveType)
-            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecrTablLanguage[0].Nzv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecrTablLanguage[0].Uzv)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecrTablLanguage[0].WaveType)
+        </th>
 
-            <th>
-                @Html.DisplayNameFor(model => model.DecrTablLanguage[0].DecrTabl.WaveSpeed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DecrTablLanguage[0].DecrTabl.Decrement)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DecrTablLanguage[0].DecrTabl.DecrFreq)
-            </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecrTablLanguage[0].DecrTabl.WaveSpeed)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecrTablLanguage[0].DecrTabl.Decrement)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DecrTablLanguage[0].DecrTabl.DecrFreq)
+        </th>
 
-            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
-            {
+        @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+        {
             <th>
                 @SharedLocalizer["Reference"]
             </th>
-            }
+        }
 
-         <th>Actions</th>
+        <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     @foreach (var item in Model.DecrTablLanguage)
     {
-    <tr>
+        <tr>
             <td>
                 @Html.Raw(item.Nzv)
             </td>
@@ -96,38 +96,45 @@
                 @Html.Raw(item.DecrTabl.DecrFreq)
             </td>
 
-        @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
-        {
-            <td>
-                <a data-toggle="popover" data-placement="right"
-                   data-content="@Html.Raw(Model.References[item.DecrTablId])">
-                    @Model.References[item.DecrTablId].BibliogrId
-                </a>
-            </td>
+            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+            {
+                <td>
+                    <a data-toggle="popover" data-placement="right"
+                       data-content="@Html.Raw(Model.References[item.DecrTablId])">
+                        @Model.References[item.DecrTablId].BibliogrId
+                    </a>
+                </td>
 
-         <td>
-            <div>
-                <a href="@UrlBuilder.BuildPropertyLink(
-                             Model.GetLanguage(),
-                             "Wave",
-                             "Edit",
-                             queryParams: $"id={item.Id}"
-                             )">
-                    Edit
-                </a>
-                |
-                <a href="@UrlBuilder.BuildPropertyLink(
-                             Model.GetLanguage(),
-                             "Wave",
-                             "Delete",
-                             queryParams: $"id={item.Id}"
-                             )">
-                    Delete
-                </a>
-            </div>
-         </td>
-         }
-    </tr>
+                <td>
+                    <div>
+                        <a href="@UrlBuilder.BuildPropertyLink(
+                                     Model.GetLanguage(),
+                                     "Wave",
+                                     "Edit",
+                                     queryParams: $"id={item.Id}"
+                                     )">
+                            Edit
+                        </a>
+                        |
+                        <a href="@UrlBuilder.BuildPropertyLink(
+                                     Model.GetLanguage(),
+                                     "Wave",
+                                     "Delete",
+                                     queryParams: $"id={item.Id}"
+                                     )">
+                            Delete
+                        </a>
+                    </div>
+                </td>
+            }
+        </tr>
     }
     </tbody>
 </table>
+
+<ul>
+    @foreach (var image in Model.Images)
+    {
+        <li><a href="/ru/Images/@image.NameGraf">@Html.Raw(image.Signatur)</a></li>
+    }
+</ul>

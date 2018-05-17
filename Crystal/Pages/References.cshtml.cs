@@ -1,28 +1,21 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Crystal.Utils;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Crystal.Pages
 {
     [Authorize(Policy = "UserOnly")]
-    public class ReferencesModel : PageModel
+    public class ReferencesModel : FilePageModel
     {
-        public IActionResult OnGet(string name)
-        {
-            if (string.IsNullOrEmpty(name))
-            {
-                return NotFound();
-            }
-
-            var pdfPath = BuildPdfPath(name);
-            return File(pdfPath, "application/pdf");
-        }
-
-        private static string BuildPdfPath(string name)
+        protected override string BuildPath(string name)
         {
             return name.EndsWith(".pdf")
                 ? $"pdf/{name}"
                 : $"pdf/{name}.pdf";
+        }
+
+        protected override string GetFileMimetype()
+        {
+            return "application/pdf";
         }
     }
 }
