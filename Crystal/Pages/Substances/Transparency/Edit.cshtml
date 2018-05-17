@@ -1,0 +1,58 @@
+@page
+@model EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Transparency</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Wavepure.Id" />
+
+
+
+            <div class="form-group">
+                <label asp-for="Wavepure.Leftwave" class="control-label"></label>
+                <input asp-for="Wavepure.Leftwave" class="form-control" />
+                <span asp-validation-for="Wavepure.Leftwave" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Wavepure.Rightwave" class="control-label"></label>
+                <input asp-for="Wavepure.Rightwave" class="form-control" />
+                <span asp-validation-for="Wavepure.Rightwave" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Wavepure.SingCode" class="control-label"></label>
+                <select asp-for="Wavepure.SingCode" class="form-control" asp-items="ViewBag.SingCode"></select>
+                <span asp-validation-for="Wavepure.SingCode" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Wavepure.Bknumber" class="control-label"></label>
+                <input asp-for="Wavepure.Bknumber" class="form-control" />
+                <span asp-validation-for="Wavepure.Bknumber" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a onclick="window.history.back();">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

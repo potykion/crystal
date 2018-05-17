@@ -35,6 +35,8 @@ namespace Crystal.Pages.Substances
                 "EsOpTabl",
                 "DecrTabl",
                 "AcOpTabl",
+                "Wavepure",
+                "SistTabl"
             };
 
         private readonly CrystalContext _context;

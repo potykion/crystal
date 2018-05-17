@@ -1,0 +1,100 @@
+@page "{systemUrl}"
+
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Utils
+
+@model IndexModel
+
+@inject IHtmlLocalizer<SharedResources> SharedLocalizer;
+@inject IAuthorizationService AuthorizationService
+@inject UrlBuilder UrlBuilder
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <a href="@UrlBuilder.BuildPropertyLink(
+                     Model.GetLanguage(),
+                     "Composition",
+                     "Create",
+                     ViewContext.RouteData.Values["systemUrl"] as string)">
+        Create New
+    </a>
+
+</div>
+<table class="table">
+    <thead>
+    <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SistTabl[0].ElemNumb)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SistTabl[0].MinValue)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.SistTabl[0].MaxValue)
+            </th>
+
+
+
+         <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.SistTabl)
+    {
+    <tr>
+
+            <td>
+                    @Html.Raw(item.ElemNumb)
+            </td>
+            <td>
+                    @Html.Raw(item.MinValue)
+            </td>
+            <td>
+                    @Html.Raw(item.MaxValue)
+            </td>
+
+        @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+        {
+
+         <td>
+            <div>
+                <a href="@UrlBuilder.BuildPropertyLink(
+                             Model.GetLanguage(),
+                             "Composition",
+                             "Edit",
+                             queryParams: $"id={item.Id}"
+                             )">
+                    Edit
+                </a>
+                |
+                <a href="@UrlBuilder.BuildPropertyLink(
+                             Model.GetLanguage(),
+                             "Composition",
+                             "Delete",
+                             queryParams: $"id={item.Id}"
+                             )">
+                    Delete
+                </a>
+            </div>
+         </td>
+         }
+    </tr>
+    }
+    </tbody>
+</table>
+
+<ul>
+    @foreach (var image in Model.Images)
+    {
+        <li><a href="/ru/Images/@image.NameGraf">@Html.Raw(image.Signatur)</a></li>
+    }
+</ul>
