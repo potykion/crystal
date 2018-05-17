@@ -28,12 +28,14 @@ namespace Crystal.Pages.Substances
                 .Include(h => h.HeadTabl)
                 .Where(h => h.LanguageId == this.GetLanguageId());
 
-            HeadTablClass0 = await headTablLanguage.Where(headTabl => headTabl.HeadTabl.Class == 0).ToListAsync();
+            HeadTablClass0 = await headTablLanguage
+                .Where(headTabl => headTabl.HeadTabl.Class == 0)
+                .OrderBy(headTabl => headTabl.HeadTabl.System)
+                .ToListAsync();
             HeadTablClass1 = await headTablLanguage
-                .Where(headTabl =>
-                    headTabl.HeadTabl.Class == 1 &&
-                    headTabl.HeadTablId != LangasitesId
-                ).ToListAsync();
+                .Where(headTabl => headTabl.HeadTabl.Class == 1 && headTabl.HeadTablId != LangasitesId)
+                .OrderBy(headTabl => headTabl.HeadTabl.System)
+                .ToListAsync();
         }
     }
 }
