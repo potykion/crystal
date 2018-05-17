@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Crystal.Models
+﻿namespace Crystal.Models
 {
     public partial class BibliogrLanguage
     {
@@ -13,10 +10,11 @@ namespace Crystal.Models
         public string Title { get; set; }
 
         public BibliogrInvariant Bibliogr { get; set; }
-         
+
         public override string ToString()
         {
-            return $"{BibliogrId}. {Authors} {Title} {Source}";
+            var referenceTag = $"<a href='/References/{BibliogrId}.pdf'>pdf</a>";
+            return $"{BibliogrId}. {Authors} {Title} {Source} [{referenceTag}]";
         }
     }
 }
