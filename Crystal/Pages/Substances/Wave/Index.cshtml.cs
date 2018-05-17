@@ -20,11 +20,11 @@ namespace Crystal.Pages.Substances.Wave
         }
 
         public IList<DecrTablLanguage> DecrTablLanguage { get; set; }
+        public IList<GrafTablLanguage> Images { get; set; }
         public IDictionary<int, BibliogrLanguage> References { get; set; }
         public IList<SingTabl> SingTabl { get; set; }
-        public IList<GrafTablLanguage> Images { get; set; }
 
-        public async Task OnGetAsync(string systemUrl, string sing)
+        public async Task OnGetAsync(string systemUrl , string sing)
         {
             var headClue = _contextUtils.GetHeadClueBySystemUrl(systemUrl);
 
@@ -41,6 +41,13 @@ namespace Crystal.Pages.Substances.Wave
 
             DecrTablLanguage = await substanceDecrTabl.ToListAsync();
 
+            Images = await _context.GrafTablLanguage
+                .Include(image => image.GrafTabl)
+                .Where(image => image.LanguageId == this.GetLanguageId())
+                .Where(image => image.GrafTabl.HeadClue == headClue)
+                .Where(image => image.GrafTabl.NompClue == 27)
+                .ToListAsync();
+
             SingTabl = await _context.SingTabl
                 .Where(s => s.HeadClue == headClue)
                 .ToListAsync();
@@ -54,13 +61,6 @@ namespace Crystal.Pages.Substances.Wave
                 .ToDictionary(h => h.DecrTablId, h =>
                     h.DecrTabl.Bknumber.HasValue ? bibliogrLanguage[(int) h.DecrTabl.Bknumber] : null
                 );
-
-            Images = await _context.GrafTablLanguage
-                .Include(image => image.GrafTabl)
-                .Where(image => image.LanguageId == this.GetLanguageId())
-                .Where(image => image.GrafTabl.HeadClue == headClue)
-                .Where(image => image.GrafTabl.NompClue == 21)
-                .ToListAsync();
         }
     }
 }
