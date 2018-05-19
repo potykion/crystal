@@ -40,10 +40,27 @@
 <div class="list-group">
     @foreach (var item in Model.PropertiesLanguage)
     {
-        <a asp-page="./@item.Properties.TableNameUrl/Index"
-           asp-route-systemUrl='@ViewContext.RouteData.Values["systemUrl"]'
-           class="list-group-item">
-            @Html.Raw(item.Nazvprop)
-        </a>
+        
+        
+         @if(Model.AvailableProperties[item.Properties.TableName])
+         {
+             
+             <a asp-page="./@item.Properties.TableNameUrl/Index"
+                asp-route-systemUrl='@ViewContext.RouteData.Values["systemUrl"]'           
+                class="list-group-item">
+                 @Html.Raw(item.Nazvprop)
+             </a>
+         }
+         else
+         {
+             <a asp-page="./@item.Properties.TableNameUrl/Index"
+                asp-route-systemUrl='@ViewContext.RouteData.Values["systemUrl"]'           
+                class="list-group-item disabled"
+                >
+                 @Html.Raw(item.Nazvprop)
+             </a>
+
+         }
+        
     }
 </div>
