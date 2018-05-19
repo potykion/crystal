@@ -12,7 +12,7 @@ namespace Crystal.Models
 
         public int HeadClue { get; set; }
         public decimal? Temper { get; set; }
-        public decimal Suspense { get; set; }
+        public decimal? Suspense { get; set; }
         public decimal? ErrSusp { get; set; }
         public int? Bknumber { get; set; }
         public int Id { get; set; }
