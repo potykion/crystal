@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using System.Net.Http;
+using System.Reflection.Metadata.Ecma335;
+using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Crystal.Auth;
@@ -8,16 +12,25 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json.Linq;
 
 namespace Crystal.Pages.Account
 {
     public class LoginModel : PageModel
     {
+        private readonly IConfiguration _configuration;
         [BindProperty] public InputModel Input { get; set; }
 
         public string ReturnUrl { get; set; }
 
         [TempData] public string ErrorMessage { get; set; }
+
+
+        public LoginModel(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public class InputModel
         {
@@ -92,22 +105,59 @@ namespace Crystal.Pages.Account
 
         private async Task<User> AuthenticateUser(string email, string password)
         {
-            // For demonstration purposes, authenticate a user
-            // with a static email address. Ignore the password.
-            // Assume that checking the database takes 500ms
+            var isAdmin = CheckAdminCredentials(Input.Email, Input.Password);
 
-            await Task.Delay(500);
-
-            if (Input.Email == "potykion@gmail.com")
+            if (isAdmin)
             {
                 return new User
                 {
-                    Email = "potykion@gmail.com",
+                    Email = Input.Email,
                     Role = "Administrator"
                 };
             }
 
+            var loginData = await MakeSSOCall(Input.Email, Input.Password);
+            var loginSuccessful = !string.IsNullOrEmpty(loginData);
+
+            if (loginSuccessful)
+            {
+                return new User
+                {
+                    Email = Input.Email,
+                    Role = "User",
+                    SSOData = loginData
+                };
+            }
+
             return null;
+        }
+
+        private bool CheckAdminCredentials(string login, string password)
+        {
+            return _configuration["Admin:Login"] == login &&
+                   _configuration["Admin:Password"] == password;
+        }
+
+        private async Task<string> MakeSSOCall(string login, string password)
+        {
+            var url = "http://sso.imet-db.ru/sso/json_auth.ashx";
+
+            var values = new Dictionary<string, string>
+            {
+                {"mode", "login"},
+                {"login", login},
+                {"pass", password}
+            };
+            var content = new FormUrlEncodedContent(values);
+
+            var client = new HttpClient();
+            var response = await client.PostAsync(url, content);
+
+            var responseData = await response.Content.ReadAsStringAsync();
+
+            var parsedData = JObject.Parse(responseData);
+            var loginData = parsedData["Data"].ToString();
+            return loginData;
         }
     }
 }

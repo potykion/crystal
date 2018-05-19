@@ -29,10 +29,13 @@ namespace Crystal
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie();
 
-            // to get user in templates
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
+            // to get user in template
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            // to build url in templates
             services.AddSingleton<UrlBuilder>();
+            // to access config from PageModels
+            services.AddSingleton<IConfiguration>(Configuration);
 
             // add localization
             services.AddLocalization(options => options.ResourcesPath = "Resources");

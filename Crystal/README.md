@@ -14,6 +14,11 @@ To generate pages:
 dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -udl -outDir Pages\HeadTabl --referenceScriptLibraries
 ```
 
+To deploy app:
+```
+dotnet publish
+```
+
 # References
 
 1. [Running Entity Framework (Core) commands in Rider](https://blog.jetbrains.com/dotnet/2017/08/09/running-entity-framework-core-commands-rider/)
@@ -41,3 +46,4 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 23. [Razor Pages route and app convention features in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/mvc/razor-pages/razor-pages-conventions?view=aspnetcore-2.1)
 24. [URL Rewriting Middleware in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/url-rewriting?view=aspnetcore-2.1&tabs=aspnetcore2x)
 25. [Add search to ASP.NET Core Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/search?view=aspnetcore-2.1)
+26. [dotnet publish](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish?tabs=netcore2x)
