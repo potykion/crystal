@@ -11,12 +11,14 @@
 @inject UrlBuilder UrlBuilder
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cury";
 }
 
-<h2>Index</h2>
+<h2>Cury</h2>
 
 <div>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+    {
     <a href="@UrlBuilder.BuildPropertyLink(
                      Model.GetLanguage(),
                      "Cury",
@@ -24,6 +26,7 @@
                      ViewContext.RouteData.Values["systemUrl"] as string)">
         Create New
     </a>
+    }
 
 </div>
 <table class="table">
@@ -36,18 +39,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.CuryTablLanguage[0].CuryTabl.CuryTemp)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.CuryTablLanguage[0].CuryTabl.ErrCury)
             </th>
 
-            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
-            {
+
+        @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+        {
             <th>
                 @SharedLocalizer["Reference"]
             </th>
-            }
 
-         <th>Actions</th>
+        <th>Actions</th>
+        }
     </tr>
     </thead>
     <tbody>
@@ -59,10 +64,10 @@
             </td>
 
             <td>
-                @Html.Raw(item.CuryTabl.CuryTemp)
+                    @Html.Raw(item.CuryTabl.CuryTemp)
             </td>
             <td>
-                @Html.Raw(item.CuryTabl.ErrCury)
+                    @Html.Raw(item.CuryTabl.ErrCury)
             </td>
 
         @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
@@ -70,7 +75,8 @@
             <td>
                 <a data-toggle="popover" data-placement="right"
                    data-content="@Html.Raw(Model.References[item.CuryTablId])">
-                    @Model.References[item.CuryTablId].BibliogrId
+                   @Model.References[item.CuryTablId].BibliogrId
+
                 </a>
             </td>
 

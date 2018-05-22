@@ -12,7 +12,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Вещества</h2>
+<h2>@Localizer["Substances"]</h2>
 
 
 @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
@@ -24,7 +24,6 @@
     </p>
 }
 
-<h3>Соединения</h3>
 
 <div class="row">
     @foreach (var item in Model.HeadTablClass0)
@@ -37,7 +36,7 @@
     }
 </div>
 
-<h3>Лангаситы</h3>
+<h3>@Localizer["Langasites"]</h3>
 
 <div class="row">
     @foreach (var item in Model.HeadTablClass1)

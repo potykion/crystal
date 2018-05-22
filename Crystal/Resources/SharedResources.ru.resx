@@ -27,4 +27,13 @@
     <data name="Substances">
         <value>Вещества</value>
     </data>
+
+    <data name="Search">
+        <value>Поиск</value>
+    </data>
+
+    <data name="Records without translate">
+        <value>Записи без перевода</value>
+    </data>
+    
 </root>

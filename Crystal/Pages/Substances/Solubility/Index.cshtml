@@ -11,12 +11,14 @@
 @inject UrlBuilder UrlBuilder
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Solubility";
 }
 
-<h2>Index</h2>
+<h2>Solubility</h2>
 
 <div>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+    {
     <a href="@UrlBuilder.BuildPropertyLink(
                      Model.GetLanguage(),
                      "Solubility",
@@ -24,6 +26,7 @@
                      ViewContext.RouteData.Values["systemUrl"] as string)">
         Create New
     </a>
+    }
 
 </div>
 <table class="table">
@@ -39,21 +42,24 @@
             <th>
                 @Html.DisplayNameFor(model => model.SuspTablLanguage[0].SuspTabl.Temper)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.SuspTablLanguage[0].SuspTabl.Suspense)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.SuspTablLanguage[0].SuspTabl.ErrSusp)
             </th>
 
-            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
-            {
+
+        @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+        {
             <th>
                 @SharedLocalizer["Reference"]
             </th>
-            }
 
-         <th>Actions</th>
+        <th>Actions</th>
+        }
     </tr>
     </thead>
     <tbody>
@@ -68,13 +74,13 @@
             </td>
 
             <td>
-                @Html.Raw(item.SuspTabl.Temper)
+                    @Html.Raw(item.SuspTabl.Temper)
             </td>
             <td>
-                @Html.Raw(item.SuspTabl.Suspense)
+                    @Html.Raw(item.SuspTabl.Suspense)
             </td>
             <td>
-                @Html.Raw(item.SuspTabl.ErrSusp)
+                    @Html.Raw(item.SuspTabl.ErrSusp)
             </td>
 
         @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
@@ -82,7 +88,8 @@
             <td>
                 <a data-toggle="popover" data-placement="right"
                    data-content="@Html.Raw(Model.References[item.SuspTablId])">
-                    @Model.References[item.SuspTablId].BibliogrId
+                   @Model.References[item.SuspTablId].BibliogrId
+
                 </a>
             </td>
 

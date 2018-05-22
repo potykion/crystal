@@ -1,8 +1,11 @@
 ﻿@page "{systemUrl}"
 @using Substances
 @using Utils
+@using Microsoft.AspNetCore.Authorization
+
 @model Substances.SubstanceInfoModel
 @inject UrlBuilder UrlBuilder;
+@inject IAuthorizationService AuthorizationService
 
 @{
     ViewData["Title"] = Model.HeadTablLanguage.HeadTabl.SystemUrl;
@@ -24,16 +27,19 @@
     @Html.DisplayFor(model => model.HeadTablLanguage.HeadTabl.Help)
 </p>
 
-<h3>Actions</h3>
+@if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+{
+    <h3>Actions</h3>
 
-<div>
-    <a href="@UrlBuilder.BuildSubstanceLink(
-                 Model.GetLanguage(),
-                 ViewContext.RouteData.Values["systemUrl"] as string,
-                 "Edit")">
-        Edit
-    </a>
-</div>
+    <div>
+        <a href="@UrlBuilder.BuildSubstanceLink(
+                     Model.GetLanguage(),
+                     ViewContext.RouteData.Values["systemUrl"] as string,
+                     "Edit")">
+            Edit
+        </a>
+    </div>
+}
 
 <h3>Properties</h3>
 
@@ -44,22 +50,25 @@
         
          @if(Model.AvailableProperties[item.Properties.TableName])
          {
-             
-             <a asp-page="./@item.Properties.TableNameUrl/Index"
-                asp-route-systemUrl='@ViewContext.RouteData.Values["systemUrl"]'           
+             <a href="@UrlBuilder.BuildPropertyLink(
+                          Model.GetLanguage(),
+                          @item.Properties.TableNameUrl,
+                          "Index",
+                          ViewContext.RouteData.Values["systemUrl"] as string)"
                 class="list-group-item">
                  @Html.Raw(item.Nazvprop)
              </a>
          }
          else
          {
-             <a asp-page="./@item.Properties.TableNameUrl/Index"
-                asp-route-systemUrl='@ViewContext.RouteData.Values["systemUrl"]'           
-                class="list-group-item disabled"
-                >
+             <a href="@UrlBuilder.BuildPropertyLink(
+                          Model.GetLanguage(),
+                          @item.Properties.TableNameUrl,
+                          "Index",
+                          ViewContext.RouteData.Values["systemUrl"] as string)"
+                class="list-group-item disabled">
                  @Html.Raw(item.Nazvprop)
              </a>
-
          }
         
     }

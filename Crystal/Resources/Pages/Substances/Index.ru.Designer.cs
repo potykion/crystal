@@ -68,5 +68,23 @@ namespace Crystal.Resources.Pages.Substances {
                 return ResourceManager.GetString("Create New", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Лангаситы.
+        /// </summary>
+        public static string Langasites {
+            get {
+                return ResourceManager.GetString("Langasites", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Вещества.
+        /// </summary>
+        public static string Substances {
+            get {
+                return ResourceManager.GetString("Substances", resourceCulture);
+            }
+        }
     }
 }

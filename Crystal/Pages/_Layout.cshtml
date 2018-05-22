@@ -1,7 +1,10 @@
 @using Microsoft.AspNetCore.Mvc.Localization
 @using Utils
+@using Microsoft.AspNetCore.Authorization
+
 @inject IHtmlLocalizer<SharedResources> SharedLocalizer;
 @inject UrlBuilder UrlBuilder;
+@inject IAuthorizationService AuthorizationService
 
 <!DOCTYPE html>
 <html>
@@ -40,11 +43,15 @@
                     <a asp-page="/Substances/Index">@SharedLocalizer["Substances"]</a>
                 </li>
                 <li>
-                    <a asp-page="/Substances/Search">Поиск</a>
+                    <a asp-page="/Substances/Search">@SharedLocalizer["Search"]</a>
                 </li>
+                
+            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+            {
                 <li>
-                    <a asp-page="/WithoutTranslate">Записи без перевода</a>
+                    <a asp-page="/WithoutTranslate">@SharedLocalizer["Records without translate"]</a>
                 </li>
+            }
             </ul>
             @await Html.PartialAsync("_LoginPartial")
 

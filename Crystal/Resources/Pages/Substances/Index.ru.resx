@@ -27,4 +27,12 @@
     <data name="Create New">
         <value>Создать</value>
     </data>
+
+    <data name="Substances">
+        <value>Вещества</value>
+    </data>
+    
+    <data name="Langasites">
+        <value>Лангаситы</value>
+    </data>
 </root>

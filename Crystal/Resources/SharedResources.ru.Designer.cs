@@ -61,6 +61,24 @@ namespace Crystal.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Записи без перевода.
+        /// </summary>
+        public static string Records_without_translate {
+            get {
+                return ResourceManager.GetString("Records without translate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Поиск.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Вещества.
         /// </summary>
         public static string Substances {

@@ -11,12 +11,14 @@
 @inject UrlBuilder UrlBuilder
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Composition";
 }
 
-<h2>Index</h2>
+<h2>Composition</h2>
 
 <div>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+    {
     <a href="@UrlBuilder.BuildPropertyLink(
                      Model.GetLanguage(),
                      "Composition",
@@ -24,6 +26,7 @@
                      ViewContext.RouteData.Values["systemUrl"] as string)">
         Create New
     </a>
+    }
 
 </div>
 <table class="table">
@@ -43,8 +46,11 @@
             </th>
 
 
+        @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+        {
 
-         <th>Actions</th>
+        <th>Actions</th>
+        }
     </tr>
     </thead>
     <tbody>

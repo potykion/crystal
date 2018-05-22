@@ -11,12 +11,14 @@
 @inject UrlBuilder UrlBuilder
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Heat";
 }
 
-<h2>Index</h2>
+<h2>Heat</h2>
 
 <div>
+    @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+    {
     <a href="@UrlBuilder.BuildPropertyLink(
                      Model.GetLanguage(),
                      "Heat",
@@ -24,6 +26,7 @@
                      ViewContext.RouteData.Values["systemUrl"] as string)">
         Create New
     </a>
+    }
 
 </div>
 <table class="table">
@@ -36,24 +39,28 @@
             <th>
                 @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.Temperat)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ZnC)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.C)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.HeatTablLanguage[0].HeatTabl.ErrC)
             </th>
 
-            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
-            {
+
+        @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+        {
             <th>
                 @SharedLocalizer["Reference"]
             </th>
-            }
 
-         <th>Actions</th>
+        <th>Actions</th>
+        }
     </tr>
     </thead>
     <tbody>
@@ -65,16 +72,16 @@
             </td>
 
             <td>
-                @Html.Raw(item.HeatTabl.Temperat)
+                    @Html.Raw(item.HeatTabl.Temperat)
             </td>
             <td>
-                @Html.Raw(item.HeatTabl.ZnC)
+                    @Html.Raw(item.HeatTabl.ZnC)
             </td>
             <td>
-                @Html.Raw(item.HeatTabl.C)
+                    @Html.Raw(item.HeatTabl.C)
             </td>
             <td>
-                @Html.Raw(item.HeatTabl.ErrC)
+                    @Html.Raw(item.HeatTabl.ErrC)
             </td>
 
         @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
@@ -82,7 +89,8 @@
             <td>
                 <a data-toggle="popover" data-placement="right"
                    data-content="@Html.Raw(Model.References[item.HeatTablId])">
-                    @Model.References[item.HeatTablId].BibliogrId
+                   @Model.References[item.HeatTablId].BibliogrId
+
                 </a>
             </td>
 
