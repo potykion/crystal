@@ -16,6 +16,7 @@ dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -u
 
 To deploy app:
 ```
+dotnet bundle
 dotnet publish
 ```
 
