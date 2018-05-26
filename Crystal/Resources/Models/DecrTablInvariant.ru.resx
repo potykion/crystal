@@ -21,7 +21,11 @@
 
     
     <data name="WaveSpeed">
-        <value>Скорость волны, 10<sup>5</sup> cм/cек</value>
+        <value>
+            <![CDATA[
+            Скорость волны, 10<sup>5</sup> cм/cек
+            ]]>
+        </value>
     </data>
     <data name="Decrement">
         <value>Коэффициент затухания, дБ/cм</value>
