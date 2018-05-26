@@ -13,5 +13,10 @@ namespace Crystal.Models
         public string MethodP1 { get; set; }
 
         public ElemTablInvariant ElemTabl { get; set; }
+
+        public override string ToString()
+        {
+            return $"ElemTabl(LanguageID={Id}; InvariantId={ElemTablId})";
+        }
     }
 }

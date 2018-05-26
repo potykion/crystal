@@ -55,10 +55,17 @@ namespace Crystal.Pages.Substances.Transparency
                 .Where(b => b.LanguageId == this.GetLanguageId())
                 .ToDictionaryAsync(b => b.BibliogrId, b => b);
 
-            References = Wavepure
-                .ToDictionary(h => h.Id, h =>
-                    h.Bknumber.HasValue ? bibliogrLanguage[(int) h.Bknumber] : null
-                );
+            References = new Dictionary<int, BibliogrLanguage>();
+            foreach (var m in Wavepure)
+            {
+                if (References.ContainsKey(m.Id)) continue;
+
+                var bibliogr = m.Bknumber.HasValue
+                    ? bibliogrLanguage[(int) m.Bknumber]
+                    : null;
+
+                References[m.Id] = bibliogr;
+            }
 
         }
     }

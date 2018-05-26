@@ -14,6 +14,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="2.0.0-preview1-final" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.0-preview1-final" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.0-preview1-final" />
   </ItemGroup>
   <ItemGroup>
@@ -37,4 +38,12 @@
     <_ContentIncludedByDefault Remove="Pages\Substances\ElastoOptical\Index.cshtml" />
     <_ContentIncludedByDefault Remove="Pages\Substances\Piezoelectric\Index.cshtml" />
   </ItemGroup>
+  <Target Name="CreateLogsFolder" AfterTargets="Publish">
+    <MakeDir Directories="$(PublishDir)Logs"
+             Condition="!Exists('$(PublishDir)Logs')" />
+    <WriteLinesToFile File="$(PublishDir)Logs\.log"
+                      Lines="Generated file"
+                      Overwrite="True"
+                      Condition="!Exists('$(PublishDir)Logs\.log')" />
+  </Target>
 </Project>
