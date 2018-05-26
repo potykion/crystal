@@ -2,7 +2,16 @@
     @if (User.Identity.IsAuthenticated)
     {
         <li>
-            <a>@User.Identity.Name</a>
+            <a href="#" class="dropdown-toggle" id="drop3" data-toggle="dropdown"
+               role="button" aria-haspopup="true" aria-expanded="false">
+                @User.Identity.Name <span class="caret"></span>
+            </a>
+
+            <ul class="dropdown-menu" aria-labelledby="drop3">
+                <li>
+                    <a href="/Account/Logout">Log out</a>
+                </li>
+            </ul>
         </li>
     }
     else

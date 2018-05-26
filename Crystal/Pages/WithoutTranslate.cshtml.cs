@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 
 namespace Crystal
 {
+    [Authorize(Policy = "AdminOnly")]
     public class WithoutTranslateModel : PageModel
     {
         private readonly CrystalContext _context;

@@ -46,7 +46,7 @@
                     <a asp-page="/Substances/Search">@SharedLocalizer["Search"]</a>
                 </li>
                 
-            @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+            @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
             {
                 <li>
                     <a asp-page="/WithoutTranslate">@SharedLocalizer["Records without translate"]</a>
