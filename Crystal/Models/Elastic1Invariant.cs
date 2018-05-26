@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crystal.Models
 {
@@ -12,10 +13,10 @@ namespace Crystal.Models
 
         public int HeadClue { get; set; }
         public string SingCode { get; set; }
-        public decimal? TemperEl { get; set; }
-        public string CondClu1 { get; set; }
-        public decimal? E1 { get; set; }
-        public decimal? ErrE { get; set; }
+        [Display(Name = "TemperEl")] public float? TemperEl { get; set; }
+        [Display(Name = "CondClu1")] public string CondClu1 { get; set; }
+        [Display(Name = "E1")] public float? E1 { get; set; }
+        [Display(Name = "ErrE")] public float? ErrE { get; set; }
         public int? Bknumber { get; set; }
         public int Id { get; set; }
 

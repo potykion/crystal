@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crystal.Models
 {
@@ -8,7 +9,7 @@ namespace Crystal.Models
         public int Id { get; set; }
         public int ConstSelId { get; set; }
         public int LanguageId { get; set; }
-        public string Measure { get; set; }
+        [Display(Name = "Measure")] public string Measure { get; set; }
 
         public ConstSelInvariant ConstSel { get; set; }
     }

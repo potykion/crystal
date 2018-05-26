@@ -7,8 +7,8 @@ namespace Crystal.Models
     {
         public int HeadClue { get; set; }
         public string ElemNumb { get; set; }
-        public decimal? MinValue { get; set; }
-        public decimal? MaxValue { get; set; }
+        public float? MinValue { get; set; }
+        public float? MaxValue { get; set; }
         public int Id { get; set; }
 
         public HeadTablInvariant HeadClueNavigation { get; set; }

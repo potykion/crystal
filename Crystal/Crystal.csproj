@@ -22,7 +22,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.1.0-preview1-final" />
     <DotNetCliToolReference Include="BundlerMinifier.Core" Version="2.8.391" />
     <DotNetCliToolReference Include="BuildBundlerMinifier" Version="2.8.391" />
-
   </ItemGroup>
   <ItemGroup>
     <_ContentIncludedByDefault Remove="Pages\Substances\Acousto-optical\Index.cshtml" />

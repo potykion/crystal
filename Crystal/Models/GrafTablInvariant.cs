@@ -11,7 +11,7 @@ namespace Crystal.Models
         }
 
         public int HeadClue { get; set; }
-        public decimal? NompClue { get; set; }
+        public float? NompClue { get; set; }
         public int Id { get; set; }
 
         public HeadTablInvariant HeadClueNavigation { get; set; }

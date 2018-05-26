@@ -26,6 +26,16 @@
 
 
     <data name="Temperat">
-        <value>Температура</value>
+        <value>Температура, К</value>
     </data>
+    <data name="ZnC">
+        <value>Обозначение коэффициента</value>
+    </data>
+    <data name="C">
+        <value>Теплоемкость, Дж/кг*К</value>
+    </data>
+    <data name="ErrC">
+        <value>Погрешность, Дж/кг*К</value>
+    </data>
+
 </root>

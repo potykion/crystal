@@ -31,7 +31,7 @@ namespace Crystal.Models
 
         public int HeadClue { get; set; }
         public string SingType { get; set; }
-        public decimal? SingClue { get; set; }
+        public float? SingClue { get; set; }
 
         public HeadTablInvariant HeadClueNavigation { get; set; }
         public ICollection<AcOpTablInvariant> AcOpTablInvariant { get; set; }
