@@ -92,6 +92,7 @@ namespace Crystal
             }
             else
             {
+                app.UseStatusCodePages();
                 app.UseExceptionHandler("/Error");
             }
 
