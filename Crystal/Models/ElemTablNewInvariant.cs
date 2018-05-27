@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Crystal.Models
 {
@@ -18,11 +19,11 @@ namespace Crystal.Models
         public double? Berr { get; set; }
         public double? C { get; set; }
         public double? Cerr { get; set; }
-        public double? Alpha { get; set; }
+        [Display(Name = "Alpha")] public double? Alpha { get; set; }
         public double? AlphaErr { get; set; }
-        public double? Beta { get; set; }
+        [Display(Name = "Beta")] public double? Beta { get; set; }
         public double? BetaErr { get; set; }
-        public double? Gamma { get; set; }
+        [Display(Name = "Gamma")] public double? Gamma { get; set; }
         public double? GammaErr { get; set; }
         public int? Bknumber { get; set; }
         public int Id { get; set; }

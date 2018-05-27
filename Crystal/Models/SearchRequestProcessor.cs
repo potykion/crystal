@@ -30,7 +30,7 @@ namespace Crystal.Models
         {
             var filters = new List<List<int>>();
 
-            
+
             IQueryable<AcOpTablLanguage> matchedAcOpTabl = _context.AcOpTablLanguage
                 .Include(m => m.AcOpTabl);
 
@@ -73,7 +73,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedAcOpTablHeadClue);
             }
-            
+
             IQueryable<CuryTablLanguage> matchedCuryTabl = _context.CuryTablLanguage
                 .Include(m => m.CuryTabl);
 
@@ -96,7 +96,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedCuryTablHeadClue);
             }
-            
+
             IQueryable<DecrTablLanguage> matchedDecrTabl = _context.DecrTablLanguage
                 .Include(m => m.DecrTabl);
 
@@ -129,7 +129,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedDecrTablHeadClue);
             }
-            
+
             IQueryable<DensTablLanguage> matchedDensTabl = _context.DensTablLanguage
                 .Include(m => m.DensTabl);
 
@@ -152,7 +152,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedDensTablHeadClue);
             }
-            
+
             IQueryable<DielectrLanguage> matchedDielectr = _context.DielectrLanguage
                 .Include(m => m.Dielectr);
 
@@ -175,7 +175,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedDielectrHeadClue);
             }
-            
+
             IQueryable<SuspTablLanguage> matchedSuspTabl = _context.SuspTablLanguage
                 .Include(m => m.SuspTabl);
 
@@ -208,7 +208,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedSuspTablHeadClue);
             }
-            
+
             IQueryable<ElOpTablLanguage> matchedElOpTabl = _context.ElOpTablLanguage
                 .Include(m => m.ElOpTabl);
 
@@ -231,7 +231,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedElOpTablHeadClue);
             }
-            
+
             IQueryable<Elastic1Language> matchedElastic1 = _context.Elastic1Language
                 .Include(m => m.Elastic1);
 
@@ -254,7 +254,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedElastic1HeadClue);
             }
-            
+
             IQueryable<MechTablLanguage> matchedMechTabl = _context.MechTablLanguage
                 .Include(m => m.MechTabl);
 
@@ -277,7 +277,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedMechTablHeadClue);
             }
-            
+
             IQueryable<HardTablLanguage> matchedHardTabl = _context.HardTablLanguage
                 .Include(m => m.HardTabl);
 
@@ -320,7 +320,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedHardTablHeadClue);
             }
-            
+
             IQueryable<HeatExpnLanguage> matchedHeatExpn = _context.HeatExpnLanguage
                 .Include(m => m.HeatExpn);
 
@@ -343,7 +343,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedHeatExpnHeadClue);
             }
-            
+
             IQueryable<PlavTablLanguage> matchedPlavTabl = _context.PlavTablLanguage
                 .Include(m => m.PlavTabl);
 
@@ -366,7 +366,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedPlavTablHeadClue);
             }
-            
+
             IQueryable<NlOpTablLanguage> matchedNlOpTabl = _context.NlOpTablLanguage
                 .Include(m => m.NlOpTabl);
 
@@ -389,45 +389,80 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedNlOpTablHeadClue);
             }
-            
-            IQueryable<ElemTablLanguage> matchedElemTabl = _context.ElemTablLanguage
-                .Include(m => m.ElemTabl);
 
-            var isElemTablDataFilled = false;
-            if (searchRequest.ElemTablMin.ElemTabl.Znparam.HasValue)
+            IQueryable<ElemTablNewLanguage> matchedElemTablNew = _context.ElemTablNewLanguage
+                .Include(m => m.ElemTablNew);
+
+            var isElemTablNewDataFilled = false;
+            if (searchRequest.ElemTablNewMin.ElemTablNew.A.HasValue)
             {
-                matchedElemTabl = matchedElemTabl.Where(m => m.ElemTabl.Znparam >= searchRequest.ElemTablMin.ElemTabl.Znparam);
-                isElemTablDataFilled = true;
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.A >= searchRequest.ElemTablNewMin.ElemTablNew.A);
+                isElemTablNewDataFilled = true;
             }
-            if (searchRequest.ElemTablMax.ElemTabl.Znparam.HasValue)
+            if (searchRequest.ElemTablNewMax.ElemTablNew.A.HasValue)
             {
-                matchedElemTabl = matchedElemTabl.Where(m => m.ElemTabl.Znparam <= searchRequest.ElemTablMax.ElemTabl.Znparam);
-                isElemTablDataFilled = true;
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.A <= searchRequest.ElemTablNewMax.ElemTablNew.A);
+                isElemTablNewDataFilled = true;
             }
-            if (!string.IsNullOrEmpty(searchRequest.ElemTablCommon.ElemTabl.NazvAngl))
+            if (searchRequest.ElemTablNewMin.ElemTablNew.B.HasValue)
             {
-                matchedElemTabl = matchedElemTabl.Where(m => m.ElemTabl.NazvAngl.Contains(searchRequest.ElemTablCommon.ElemTabl.NazvAngl));
-                isElemTablDataFilled = true;
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.B >= searchRequest.ElemTablNewMin.ElemTablNew.B);
+                isElemTablNewDataFilled = true;
             }
-            if (searchRequest.ElemTablMin.ElemTabl.ZnAngle.HasValue)
+            if (searchRequest.ElemTablNewMax.ElemTablNew.B.HasValue)
             {
-                matchedElemTabl = matchedElemTabl.Where(m => m.ElemTabl.ZnAngle >= searchRequest.ElemTablMin.ElemTabl.ZnAngle);
-                isElemTablDataFilled = true;
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.B <= searchRequest.ElemTablNewMax.ElemTablNew.B);
+                isElemTablNewDataFilled = true;
             }
-            if (searchRequest.ElemTablMax.ElemTabl.ZnAngle.HasValue)
+            if (searchRequest.ElemTablNewMin.ElemTablNew.C.HasValue)
             {
-                matchedElemTabl = matchedElemTabl.Where(m => m.ElemTabl.ZnAngle <= searchRequest.ElemTablMax.ElemTabl.ZnAngle);
-                isElemTablDataFilled = true;
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.C >= searchRequest.ElemTablNewMin.ElemTablNew.C);
+                isElemTablNewDataFilled = true;
+            }
+            if (searchRequest.ElemTablNewMax.ElemTablNew.C.HasValue)
+            {
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.C <= searchRequest.ElemTablNewMax.ElemTablNew.C);
+                isElemTablNewDataFilled = true;
+            }
+            if (searchRequest.ElemTablNewMin.ElemTablNew.Alpha.HasValue)
+            {
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.Alpha >= searchRequest.ElemTablNewMin.ElemTablNew.Alpha);
+                isElemTablNewDataFilled = true;
+            }
+            if (searchRequest.ElemTablNewMax.ElemTablNew.Alpha.HasValue)
+            {
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.Alpha <= searchRequest.ElemTablNewMax.ElemTablNew.Alpha);
+                isElemTablNewDataFilled = true;
+            }
+            if (searchRequest.ElemTablNewMin.ElemTablNew.Beta.HasValue)
+            {
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.Beta >= searchRequest.ElemTablNewMin.ElemTablNew.Beta);
+                isElemTablNewDataFilled = true;
+            }
+            if (searchRequest.ElemTablNewMax.ElemTablNew.Beta.HasValue)
+            {
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.Beta <= searchRequest.ElemTablNewMax.ElemTablNew.Beta);
+                isElemTablNewDataFilled = true;
+            }
+            if (searchRequest.ElemTablNewMin.ElemTablNew.Gamma.HasValue)
+            {
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.Gamma >= searchRequest.ElemTablNewMin.ElemTablNew.Gamma);
+                isElemTablNewDataFilled = true;
+            }
+            if (searchRequest.ElemTablNewMax.ElemTablNew.Gamma.HasValue)
+            {
+                matchedElemTablNew = matchedElemTablNew.Where(m => m.ElemTablNew.Gamma <= searchRequest.ElemTablNewMax.ElemTablNew.Gamma);
+                isElemTablNewDataFilled = true;
             }
 
-            if (isElemTablDataFilled)
+            if (isElemTablNewDataFilled)
             {
-                var matchedElemTablHeadClue = await matchedElemTabl
-                    .Select(m => m.ElemTabl.HeadClue)
+                var matchedElemTablNewHeadClue = await matchedElemTablNew
+                    .Select(m => m.ElemTablNew.HeadClue)
                     .ToListAsync();
-                filters.Add(matchedElemTablHeadClue);
+                filters.Add(matchedElemTablNewHeadClue);
             }
-            
+
             IQueryable<ModfTablLanguage> matchedModfTabl = _context.ModfTablLanguage
                 .Include(m => m.ModfTabl);
 
@@ -445,7 +480,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedModfTablHeadClue);
             }
-            
+
             IQueryable<EsOpTablLanguage> matchedEsOpTabl = _context.EsOpTablLanguage
                 .Include(m => m.EsOpTabl);
 
@@ -468,7 +503,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedEsOpTablHeadClue);
             }
-            
+
             IQueryable<RefrcIndLanguage> matchedRefrcInd = _context.RefrcIndLanguage
                 .Include(m => m.RefrcInd);
 
@@ -491,7 +526,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedRefrcIndHeadClue);
             }
-            
+
             IQueryable<HeatTablLanguage> matchedHeatTabl = _context.HeatTablLanguage
                 .Include(m => m.HeatTabl);
 
@@ -529,7 +564,7 @@ namespace Crystal.Models
                     .ToListAsync();
                 filters.Add(matchedHeatTablHeadClue);
             }
-            
+
             IQueryable<DielDissLanguage> matchedDielDiss = _context.DielDissLanguage
                 .Include(m => m.DielDiss);
 
