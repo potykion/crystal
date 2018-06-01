@@ -17,7 +17,7 @@
 <h2>Composition</h2>
 
 <div>
-    @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+    @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
     {
     <a href="@UrlBuilder.BuildPropertyLink(
                      Model.GetLanguage(),
@@ -48,7 +48,10 @@
 
         @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
         {
+        }
 
+        @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
+        {
         <th>Actions</th>
         }
     </tr>
@@ -70,7 +73,9 @@
 
         @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
         {
-
+        }
+        @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
+        {
          <td>
             <div>
                 <a href="@UrlBuilder.BuildPropertyLink(

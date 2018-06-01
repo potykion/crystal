@@ -17,7 +17,7 @@
 <h2>Transparency</h2>
 
 <div>
-    @if ((await AuthorizationService.AuthorizeAsync(User, "UserOnly")).Succeeded)
+    @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
     {
     <a href="@UrlBuilder.BuildPropertyLink(
                      Model.GetLanguage(),
@@ -60,7 +60,10 @@
             <th>
                 @SharedLocalizer["Reference"]
             </th>
+        }
 
+        @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
+        {
         <th>Actions</th>
         }
     </tr>
@@ -86,7 +89,9 @@
 
                 </a>
             </td>
-
+        }
+        @if ((await AuthorizationService.AuthorizeAsync(User, "AdminOnly")).Succeeded)
+        {
          <td>
             <div>
                 <a href="@UrlBuilder.BuildPropertyLink(
