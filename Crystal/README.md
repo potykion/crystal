@@ -2,21 +2,20 @@
 
 Crystal database admin.
 
-# Code generation
+# Commands
 
 To generate db context and models:
 ```
-dotnet ef dbcontext scaffold "Server=.\SQLEXPRESS;Database=Crystal;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -c CrystalContext -o Models -t HeadTablLanguage -t HeadTablInvariant
+dotnet ef dbcontext scaffold "Server=.\SQLEXPRESS;Database=Crystal;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -c CrystalContext -o Models -f
 ```
 
-To generate pages:
+To minify js:
 ```
-dotnet aspnet-codegenerator razorpage -m HeadTablInvariant -dc CrystalContext -udl -outDir Pages\HeadTabl --referenceScriptLibraries
+dotnet bundle
 ```
 
 To deploy app:
 ```
-dotnet bundle
 dotnet publish
 ```
 
@@ -48,3 +47,4 @@ dotnet publish
 24. [URL Rewriting Middleware in ASP.NET Core](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/url-rewriting?view=aspnetcore-2.1&tabs=aspnetcore2x)
 25. [Add search to ASP.NET Core Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/search?view=aspnetcore-2.1)
 26. [dotnet publish](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish?tabs=netcore2x)
+27. [Serilog.AspNetCore](https://github.com/serilog/serilog-aspnetcore)

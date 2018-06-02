@@ -13,6 +13,7 @@ namespace Crystal.Utils
             }
 
             var path = BuildPath(name);
+            
             return File(path, GetFileMimetype());
         }
 
