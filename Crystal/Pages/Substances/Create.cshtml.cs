@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Crystal.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -23,6 +26,13 @@ namespace Crystal.Pages.Substances
         }
 
         [BindProperty] public HeadTablLanguage HeadTablLanguage { get; set; }
+
+        public List<SelectListItem> Classes { get; } = new List<SelectListItem>
+        {
+            new SelectListItem {Value = "0", Text = "Соединение"},
+            new SelectListItem {Value = "1", Text = "Лангасит"}
+        };
+
 
         public async Task<IActionResult> OnPostAsync()
         {
